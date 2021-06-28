@@ -22,6 +22,29 @@ Why would we want independent, standardized "application package"? \
 
 Install Docker Extension on VS Code
 
+### 13. Getting Our Hands Dirty!
+
+```sh
+% docker build .
+
+#=> => writing image sha256:b41ebb6d624069022efc4835523b3a18a587eae911a4885dc1dc081b17b7511c
+```
+
+```sh
+# docker run b41ebb6d624069022efc4835523b3a18a587eae911a4885dc1dc081b17b7511c
+% docker run -p 3000:3000 b41ebb6d624069022efc4835523b3a18a587eae911a4885dc1dc081b17b7511c
+```
+
+```sh
+% docker ps
+#CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+#d53a7b8732e8   b41ebb6d6240   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   naughty_mayer
+```
+
+```sh
+% docker stop naughty_mayer
+```
+
 </details>
 
 ---
