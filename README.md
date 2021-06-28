@@ -2,7 +2,7 @@
 
 Docker &amp; Kubernetes: The Practical Guide by Maximilian Schwarzmüller
 
-This repository is to summarize this long lecture and it would not include any code.
+This repository is to summarize this long lecture and it would not include much code.
 
 ## Details
 
@@ -17,6 +17,10 @@ Why would we want independent, standardized "application package"? \
   -> This ensures that it works exactly as tested
 - It should be easy to **share a common development environment**/ setup with (new) employees and colleagues
 - We **don't want to uninstall and re-install** local dependencies and runtimes all the time
+
+### 12. Installing & Configuring an IDE
+
+Install Docker Extension on VS Code
 
 </details>
 
