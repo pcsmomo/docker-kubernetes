@@ -85,7 +85,7 @@ docker run -it node
 # -p : publish
 # 3000 : Port I want to access
 # 80 : Expose port on Dockerfile
-% docker run -p 3000:80 quizzical_chandrasekhar
+% docker run -p 3000:80 d9c36df3c92ef2cb043b296a4341544fc68ff6235c1fea9cd8ec6a658817af2
 ```
 
 4. Stop the docker container
