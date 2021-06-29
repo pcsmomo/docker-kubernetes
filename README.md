@@ -45,6 +45,19 @@ Install Docker Extension on VS Code
 % docker stop naughty_mayer
 ```
 
+### 19. Using & Running External (Pre-Built) Images
+
+```sh
+docker run node
+# NodeJS offers an "interactive mode" where you can run basic Node commands (the "REPL"). That's what he's referring to.
+
+# The history of docker Process Status
+docker ps -a
+
+# Dive into "node" container to interact
+docker run -it node
+```
+
 </details>
 
 ---
