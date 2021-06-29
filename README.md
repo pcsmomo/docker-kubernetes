@@ -47,6 +47,8 @@ Install Docker Extension on VS Code
 
 ### 19. Using & Running External (Pre-Built) Images
 
+1. Create
+
 ```sh
 docker run node
 # NodeJS offers an "interactive mode" where you can run basic Node commands (the "REPL"). That's what he's referring to.
@@ -61,6 +63,42 @@ docker run -it node
 ### 21. Building our own Image with a Dockerfile
 
 [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
+
+### 22. Running a Container based on our own Image
+
+#### To run Docker Image
+
+1. Create Dockerfile and code
+2. Create Docker image
+
+```sh
+% docker build .
+#=> => writing image sha256:d9c36df3c92ef2cb043b296a4341544fc68ff6235c1fea9cd8ec6a658817af2
+```
+
+3. Run the container based on the created image
+
+```sh
+% docker run d9c36df3c92ef2cb043b296a4341544fc68ff6235c1fea9cd8ec6a658817af2
+# http://localhost doesn't work
+
+# -p : publish
+# 3000 : Port I want to access
+# 80 : Expose port on Dockerfile
+% docker run -p 3000:80 quizzical_chandrasekhar
+```
+
+4. Stop the docker container
+
+```sh
+# See docker containers currently running without -a
+% docker ps
+
+# quizzical_chandrasekhar is the given name
+% docker stop quizzical_chandrasekhar
+```
+
+[Docker run reference](https://docs.docker.com/engine/reference/run/)
 
 </details>
 
