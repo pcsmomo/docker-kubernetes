@@ -58,6 +58,10 @@ docker ps -a
 docker run -it node
 ```
 
+### 21. Building our own Image with a Dockerfile
+
+[Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
+
 </details>
 
 ---
