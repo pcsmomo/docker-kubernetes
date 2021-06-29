@@ -100,6 +100,21 @@ docker run -it node
 
 [Docker run reference](https://docs.docker.com/engine/reference/run/)
 
+### 25. Understanding Image Layers
+
+#### Layer Based Architecture
+
+When docker build . but only some code changed not package.json,
+
+```sh
+# Copy package.json before npm install
+COPY package.json /app
+# This won't be executed again unless package.json changes
+RUN npm install
+# This will be executed always
+COPY . /app
+```
+
 </details>
 
 ---
