@@ -186,6 +186,18 @@ docker image inspect 66b7c26c279e
 # Those layers are based on Docker file commands and the original image on FROM
 ```
 
+## 36. Copying Files Into & From A Container
+
+Use case \
+: copying out the latest log files from the running container
+
+```sh
+docker cp dummy/. thirsty_yalow:/test
+rm dummy/test.txt
+docker cp thirsty_yalow:/test dummy/.
+docker cp thirsty_yalow:/test/test.txt dummy/.
+```
+
 </details>
 
 ---
