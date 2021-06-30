@@ -172,6 +172,13 @@ docker rmi 52bdb6aaae5a d9c36df3c92e
 docker rmi prune
 ```
 
+### 34. Removing Stopped Containers Automatically
+
+```sh
+# -p -rm : Automatically remove the container when it exits
+docker run -p 3000:80 -d --rm 0b260664df6f
+```
+
 </details>
 
 ---
