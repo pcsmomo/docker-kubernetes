@@ -179,6 +179,13 @@ docker rmi prune
 docker run -p 3000:80 -d --rm 0b260664df6f
 ```
 
+## 35. A Look Behind the Scenes: Inspecting Images
+
+```sh
+docker image inspect 66b7c26c279e
+# Those layers are based on Docker file commands and the original image on FROM
+```
+
 </details>
 
 ---
