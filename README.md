@@ -218,6 +218,21 @@ docker run -p 3000:80 -d --rm --name goalsapp goals:latest
 > FROM python:3.7
 > That looks better for sure.
 
+### 40. Pushing Images to DockerHub
+
+```sh
+# docker build -t pcsmomo/node-hello-world .
+docker tag goals:latest pcsmomo/node-hello-world
+# it clones from the old image
+
+docker push pcsmomo/node-hello-world
+# access denided
+
+docker login
+docker push pcsmomo/node-hello-world
+# it pushes exclude libraries existed on docker hub
+```
+
 </details>
 
 ---
@@ -229,11 +244,3 @@ docker run -p 3000:80 -d --rm --name goalsapp goals:latest
 ## Next Step
 
 -
-
-```
-
-```
-
-```
-
-```
