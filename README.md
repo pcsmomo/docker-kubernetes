@@ -211,6 +211,13 @@ docker build -t goals:latest .
 docker run -p 3000:80 -d --rm --name goalsapp goals:latest
 ```
 
+### 38. Time to Practice: Images & Containers 1 question
+
+> Maximilian clarified the version/tag of node and python on Dockerfile.
+> FROM node:14
+> FROM python:3.7
+> That looks better for sure.
+
 </details>
 
 ---
