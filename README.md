@@ -198,6 +198,19 @@ docker cp thirsty_yalow:/test dummy/.
 docker cp thirsty_yalow:/test/test.txt dummy/.
 ```
 
+### 37. Naming & Tagging Containers and Images
+
+```sh
+# naming containers
+docker run -p 3000:80 -d -rm --name goalsapp 0b260664df6f
+
+# naming & tagging images (NAME:TAG)
+docker build -t goals:latest .
+
+# test running
+docker run -p 3000:80 -d --rm --name goalsapp goals:latest
+```
+
 </details>
 
 ---
