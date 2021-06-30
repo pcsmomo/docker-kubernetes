@@ -156,6 +156,22 @@ docker run -it 66b7c26c279eb426620747dbd8b25c5dd410a2161fbbc743e8db2bc7dafe9f2
 docker start -ai priceless_tereshkova
 ```
 
+### 33. Deleting Images & Containers
+
+```sh
+# remove docker containers
+docker rm blissful_goodall
+docker rm blissful_goodall nifty_archimedes romantic_grothendieck
+
+# images list
+docker images
+# remove images and layers on the image
+# It won't be deleted if there is any running/stopped container from the image
+docker rmi 52bdb6aaae5a d9c36df3c92e
+# remove all images
+docker rmi prune
+```
+
 </details>
 
 ---
@@ -167,6 +183,10 @@ docker start -ai priceless_tereshkova
 ## Next Step
 
 -
+
+```
+
+```
 
 ```
 
