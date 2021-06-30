@@ -233,6 +233,22 @@ docker push pcsmomo/node-hello-world
 # it pushes exclude libraries existed on docker hub
 ```
 
+### 41. Pulling & Using Shared Images
+
+```sh
+# remove all images, except images related to running containers
+docker image prune -a
+
+docker pull pcsmomo/node-hello-world
+docker run -p 3000:80 --rm pcsmomo/node-hello-world
+
+docker rmi pcsmomo/node-hello-world
+docker run -p 3000:80 --rm pcsmomo/node-hello-world
+# If the image doesn't exist on local, it will reach to the hub automatically
+```
+
+> **⚠ Warning: It will find locally first even if the latest version is on the hub**
+
 </details>
 
 ---
