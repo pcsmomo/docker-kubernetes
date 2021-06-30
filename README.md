@@ -145,6 +145,17 @@ docker logs -f nifty_archimedes
 docker logs nifty_archimedes
 ```
 
+### 32. Entering Interactive Mode
+
+```sh
+# To interact with an utility application not web server
+docker build .
+# -i: interactive, -t: Allocate a pseudo-TTY
+docker run -it 66b7c26c279eb426620747dbd8b25c5dd410a2161fbbc743e8db2bc7dafe9f2
+# -a: attach, -i: interactive
+docker start -ai priceless_tereshkova
+```
+
 </details>
 
 ---
