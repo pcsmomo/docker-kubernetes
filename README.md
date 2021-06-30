@@ -115,6 +115,36 @@ RUN npm install
 COPY . /app
 ```
 
+### 29. Stopping & Restarting Containers
+
+```sh
+# help
+docker --help
+docker ps --help
+```
+
+```sh
+# Running with the attached mode (foreground, listening)
+# either Container ID or Name work
+docker start -a nifty_archimedes
+docker run -p 3000:80 25c8a7da66bd
+```
+
+```sh
+# Running with the detached mode (background)
+docker start nifty_archimedes
+docker run -p 3000:80 -d 25c8a7da66bd
+```
+
+```sh
+# Attaching to a container
+docker attach nifty_archimedes
+docker logs -f nifty_archimedes
+
+# Showing logs of a detached container
+docker logs nifty_archimedes
+```
+
 </details>
 
 ---
@@ -125,5 +155,8 @@ COPY . /app
 
 ## Next Step
 
-- TDD?
-  > Frankly, I wrote tests after writing code. I did feel testing is like a chore as the instructor, Bonnie mentioned. I have got to change my process to use profer TDD.
+-
+
+```
+
+```
