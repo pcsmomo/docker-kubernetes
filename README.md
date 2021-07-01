@@ -292,7 +292,48 @@ http://localhost:3000/feedback/awesome.txt \
 
 ### 50. Introducing Volumes
 
-**Volumes** are **folders on my host machine** hard drive which are **mounted** (“made available”, mapped) **into containers**
+**Volumes** are **folders on my host machine** hard drive which are **mounted**
+(“made available”, mapped) **into containers**
+
+```sh
+# Remove the old container and create a new container
+
+docker build -t feedback-node:volumes .
+
+docker stop feedback-app
+docker rm feedback-app
+
+docker run -p 3000:80 -d --name feedback-app --rm feedback-node:volumes
+```
+
+http://localhost:3000 \
+-> It won't save the file because cross-device error
+
+```sh
+# Remove the old image and create a new image
+
+docker logs feedback-app
+# UnhandledPromiseRejectionWarning: Error: EXDEV: cross-device link not permitted, rename '/app/temp/awesome.txt' -> '/app/feedback/awesome.txt'
+
+docker stop feedback-app
+docker rmi feedback-app
+
+# Fix server.js and rebuild the container
+docker build -t feedback-node:volumes .
+docker run -p 3000:80 -d --name feedback-app --rm feedback-node:volumes
+```
+
+http://localhost:3000 \
+Submit awesome feedback again
+
+```sh
+# Kill the old container(--rm) and run a new container
+docker stop feedback-app
+docker run -p 3000:80 -d --name feedback-app --rm feedback-node:volumes
+```
+
+http://localhost:3000/feedback/awesome.txt \
+-> WTF? still awesome.txt doesn't exist
 
 </details>
 
@@ -305,7 +346,3 @@ http://localhost:3000/feedback/awesome.txt \
 ## Next Step
 
 -
-
-```
-
-```
