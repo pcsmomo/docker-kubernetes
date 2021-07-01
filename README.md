@@ -402,6 +402,24 @@ docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "
 
 If feedback.html on local changes, it will display on the browser.
 
+### 57. A NodeJS-specific Adjustment: Using Nodemon in a Container
+
+After changing package.json and Dockerfile
+
+```sh
+docker rmi feedback-node:volumes
+docker build -t feedback-node:volumes .
+docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app -v /app/node_modules feedback-node:volumes
+```
+
+Change server.js
+
+http://localhost:3000 -> Submit awesome feedback again
+
+```sh
+docker logs feedback-app
+```
+
 </details>
 
 ---
