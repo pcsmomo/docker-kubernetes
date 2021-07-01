@@ -358,7 +358,7 @@ Delete VOLUME on Dockerfile
 ```sh
 docker rmi feedback-node:volumes
 # Use a Named Volume : It is not attached to a container
-# -v [volume name or path]:[target]
+# -v [volume name]:[container-internal path]
 docker build -t feedback-node:volumes .
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback-node:volumes
 ```
@@ -379,7 +379,7 @@ http://localhost:3000/feedback/awesome.txt -> Ta-da
 ### 54. Getting Started With Bind Mounts (Code Sharing)
 
 ```sh
-# add "-v [absolute path of volume]:/app"
+# add "-v [absolute path of local machine]:[container-internal path]"
 # it will clash and remove the container.
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app feedback-node:volumes
 
@@ -395,7 +395,7 @@ docker logs feedback-app
 ### 56. Combining & Merging Different Volumes
 
 ```sh
-# add "v /app/node_modules" -> mounting to an anonymous volume
+# add "v /app/node_modules" -> Connected to an anonymous volume
 # equivalent to "VOLUME [ "/app/node_modules" ]" on Dockerfile
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app -v /app/node_modules feedback-node:volumes
 ```
@@ -419,6 +419,14 @@ http://localhost:3000 -> Submit awesome feedback again
 ```sh
 docker logs feedback-app
 ```
+
+### 58. Volumes & Bind Mounts: Summary
+
+We have used all different approaches
+
+- docker run –v /app/data ... : Anonymous Volume
+- docker run –v [volume name]:/app/data ... : Named Volume
+- docker run –v [physical path]:/app/data ... : Bind Mount
 
 </details>
 
