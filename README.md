@@ -385,7 +385,7 @@ docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "
 
 # without --rm, it will still clash.
 docker run -d -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app feedback-node:volumes
-# or docker run -d -p 3000:80 --name feedback-app -v feedback:/app/feedback -v (pwd):/app feedback-node:volumes
+# or docker run -d -p 3000:80 --name feedback-app -v feedback:/app/feedback -v pwd:/app feedback-node:volumes
 
 docker ps -a
 docker logs feedback-app
@@ -410,6 +410,7 @@ After changing package.json and Dockerfile
 docker rmi feedback-node:volumes
 docker build -t feedback-node:volumes .
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app -v /app/node_modules feedback-node:volumes
+docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v (pwd):/app -v /app/node_modules feedback-node:volumes
 ```
 
 Change server.js
@@ -427,6 +428,14 @@ We have used all different approaches
 - docker run –v /app/data ... : Anonymous Volume
 - docker run –v [volume name]:/app/data ... : Named Volume
 - docker run –v [physical path]:/app/data ... : Bind Mount
+
+### 60. A Look at Read-Only Volumes
+
+```sh
+# add ":ro" -> Docker container can't write on this volume
+# connect /app/temp to an anonymous volume
+docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app:ro -v /app/temp -v /app/node_modules feedback-node:volumes
+```
 
 </details>
 
