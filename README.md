@@ -358,7 +358,7 @@ Delete VOLUME on Dockerfile
 ```sh
 docker rmi feedback-node:volumes
 # Use a Named Volume : It is not attached to a container
-# -v feedback:/app/feedback
+# -v [volume name or path]:[target]
 docker build -t feedback-node:volumes .
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback-node:volumes
 ```
@@ -378,9 +378,8 @@ http://localhost:3000/feedback/awesome.txt -> Ta-da
 
 ### 54. Getting Started With Bind Mounts (Code Sharing)
 
-# -v [absolute path]:/app
-
 ```sh
+# add "-v [absolute path of volume]:/app"
 # it will clash and remove the container.
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app feedback-node:volumes
 
@@ -392,6 +391,16 @@ docker ps -a
 docker logs feedback-app
 # Error: Cannot find module 'express'
 ```
+
+### 56. Combining & Merging Different Volumes
+
+```sh
+# add "v /app/node_modules" -> mounting to an anonymous volume
+# equivalent to "VOLUME [ "/app/node_modules" ]" on Dockerfile
+docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app -v /app/node_modules feedback-node:volumes
+```
+
+If feedback.html on local changes, it will display on the browser.
 
 </details>
 
