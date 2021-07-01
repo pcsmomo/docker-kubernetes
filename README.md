@@ -376,6 +376,23 @@ docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feed
 
 http://localhost:3000/feedback/awesome.txt -> Ta-da
 
+### 54. Getting Started With Bind Mounts (Code Sharing)
+
+# -v [absolute path]:/app
+
+```sh
+# it will clash and remove the container.
+docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app feedback-node:volumes
+
+# without --rm, it will still clash.
+docker run -d -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app feedback-node:volumes
+# or docker run -d -p 3000:80 --name feedback-app -v feedback:/app/feedback -v (pwd):/app feedback-node:volumes
+
+docker ps -a
+docker logs feedback-app
+# Error: Cannot find module 'express'
+```
+
 </details>
 
 ---
