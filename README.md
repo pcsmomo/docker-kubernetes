@@ -4,7 +4,9 @@ Docker &amp; Kubernetes: The Practical Guide by Maximilian Schwarzmüller
 
 This repository is to summarize this long lecture and it would not include much code.
 
-## Details
+# Details
+
+## Docker
 
 <details open>
   <summary>Click to Contract/Expend</summary>
