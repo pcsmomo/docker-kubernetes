@@ -458,6 +458,28 @@ docker volume rm feedback-files
 > Bind Mounts option is for a developer mode to reflect changes rapidly. \
 > Better keep "COPY" in Dockerfile, so it creates a snapshot in the production
 
+## 65. Working with Environment Variables & ".env" Files
+
+```sh
+# Using ENV from Dockerfile
+docker build -t feedback-node:env .
+docker run -d --rm -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01:/app:ro" -v /app/temp -v /app/node_modules feedback-node:env
+
+# Using runtime ENVironment variables
+# --env or -e
+docker run -d --rm -p 3000:8000 --env PORT=8000 --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01:/app:ro" -v /app/temp -v /app/node_modules feedback-node:env
+
+docker run -d --rm -p 3000:8000 -e PORT=8000 --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01:/app:ro" -v /app/temp -v /app/node_modules feedback-node:env
+
+# Using .env file
+docker run -d --rm -p 3000:8000 --env-file ./.env --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01:/app:ro" -v /app/temp -v /app/node_modules feedback-node:env
+```
+
+## 66. Environment Variables & Security
+
+> **⚠ Warning: ENV on Dockerfile can be exposed through "docker history <image>"** \
+> For credentials and private keys, use .env and do not commit to github.
+
 </details>
 
 ---

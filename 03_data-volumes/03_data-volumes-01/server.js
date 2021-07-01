@@ -45,6 +45,8 @@ app.post('/create', async (req, res) => {
   });
 });
 
-app.listen(80, function () {
-  console.log('info', 'Server is running at port : ' + 80);
+// app.listen(process.env.PORT);
+const PORT = process.env.PORT;
+app.listen(PORT, function () {
+  console.log(`info', 'Server is running at port : ${PORT}`);
 });
