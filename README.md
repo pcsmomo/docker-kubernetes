@@ -270,6 +270,26 @@ After writing a feedback \
 http://localhost:3000/feedback/awesome.txt \
 -> awesome.txt is saved on the container only
 
+### 49. Understanding the Problem
+
+```sh
+docker stop feedback-app
+# the container is deleted now due to --rm flag
+
+docker run -p 3000:80 -d --name feedback-app feedback-node
+```
+
+http://localhost:3000/feedback/awesome.txt \
+-> Can't reach awesome.txt because it's removed when the container deleted.
+
+```sh
+docker stop feedback-app
+docker start feedback-app
+```
+
+http://localhost:3000/feedback/awesome.txt \
+-> awesome.txt exists
+
 </details>
 
 ---
@@ -281,3 +301,7 @@ http://localhost:3000/feedback/awesome.txt \
 ## Next Step
 
 -
+
+```
+
+```
