@@ -1,5 +1,7 @@
 FROM node:14
 
+# ARG DEFAULT_PORT=80  # if it is here, RUN npm install will run every time.
+
 WORKDIR /app
 
 COPY package.json .
@@ -8,7 +10,9 @@ RUN npm install
 
 COPY . .
 
-ENV PORT 80
+ARG DEFAULT_PORT=80
+
+ENV PORT $DEFAULT_PORT
 
 EXPOSE $PORT
 

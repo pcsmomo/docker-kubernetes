@@ -477,8 +477,17 @@ docker run -d --rm -p 3000:8000 --env-file ./.env --name feedback-app -v feedbac
 
 ## 66. Environment Variables & Security
 
-> **⚠ Warning: ENV on Dockerfile can be exposed through "docker history <image>"** \
+> **⚠ Warning: ENV on Dockerfile can be exposed through "docker history \<image\>"** \
 > For credentials and private keys, use .env and do not commit to github.
+
+### 67. Using Build Arguments (ARG)
+
+```sh
+# Using Dockerfile
+docker build -t feedback-node:web-app .
+# Manipulate ARG on Dockerfile
+docker build -t feedback-node:dev --build-arg DEFAULT_PORT=8000 .
+```
 
 </details>
 
