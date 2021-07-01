@@ -259,6 +259,17 @@ docker run -p 3000:80 --rm pcsmomo/node-hello-world
 - Permanent App Data : Read + Writ, permanent, stored in Containers & Volumes
   - e.g. user accounts
 
+### 48. Building & Understanding the Demo App
+
+```sh
+docker build -t feedback-node .
+docker run -p 3000:80 -d --name feedback-app --rm feedback-node
+```
+
+After writing a feedback \
+http://localhost:3000/feedback/awesome.txt \
+-> awesome.txt is saved on the container only
+
 </details>
 
 ---
