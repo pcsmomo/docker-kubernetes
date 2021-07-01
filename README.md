@@ -338,7 +338,9 @@ http://localhost:3000/feedback/awesome.txt \
 
 ![Two Types of External Data Storages](resources/03_two-types-of-external-data-storages.jpg 'Two Types of External Data Storages')
 
-Anonymous Volumes will be deleted when the container was killed.
+> Anonymous Volumes will be **removed automatically**, when the container started with --rm, was stopped(and removed). \
+> However, if a container is started **without --rm**, the anonymous volume would **NOT be removed**, even if you remove the container. \
+> And **a new anonymous volume will be created**, when docker is re-created and re-run
 
 ```sh
 # Check and delete the Anonymous Volume
