@@ -323,8 +323,7 @@ docker build -t feedback-node:volumes .
 docker run -p 3000:80 -d --name feedback-app --rm feedback-node:volumes
 ```
 
-http://localhost:3000 \
-Submit awesome feedback again
+http://localhost:3000 -> Submit awesome feedback again
 
 ```sh
 # Kill the old container(--rm) and run a new container
@@ -334,6 +333,46 @@ docker run -p 3000:80 -d --name feedback-app --rm feedback-node:volumes
 
 http://localhost:3000/feedback/awesome.txt \
 -> WTF? still awesome.txt doesn't exist
+
+### 52. Named Volumes To The Rescue!
+
+![Two Types of External Data Storages](resources/03_two-types-of-external-data-storages.jpg 'Two Types of External Data Storages')
+
+Anonymous Volumes will be deleted when the container was killed.
+
+```sh
+# Check and delete the Anonymous Volume
+docker volume --help
+docker volume ls
+# DRIVER    VOLUME NAME
+# local     4919100018b2e0443ff8933050148acb34801a0a98769d6af084879fce152936
+docker stop feedback-app
+docker volume ls
+# the volume has been removed
+```
+
+Delete VOLUME on Dockerfile
+
+```sh
+docker rmi feedback-node:volumes
+# Use a Named Volume : It is not attached to a container
+# -v feedback:/app/feedback
+docker build -t feedback-node:volumes .
+docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback-node:volumes
+```
+
+http://localhost:3000 -> Submit awesome feedback again
+
+```sh
+# Stop/remove the container and run a new container
+docker stop feedback-app
+docker volume ls
+# DRIVER    VOLUME NAME
+# local     feedback
+docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback-node:volumes
+```
+
+http://localhost:3000/feedback/awesome.txt -> Ta-da
 
 </details>
 
