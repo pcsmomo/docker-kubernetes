@@ -380,6 +380,8 @@ http://localhost:3000/feedback/awesome.txt -> Ta-da
 
 ```sh
 # add "-v [absolute path of local machine]:[container-internal path]"
+# This option is for a developer mode to reflect changes rapidly.
+
 # it will clash and remove the container.
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app feedback-node:volumes
 
@@ -448,6 +450,13 @@ docker volume inspect feedback
 
 docker volume rm feedback-files
 ```
+
+## 62. Using "COPY" vs Bind Mounts
+
+-v [absolute path of local machine]:[container-internal path]
+
+> Bind Mounts option is for a developer mode to reflect changes rapidly. \
+> Better keep "COPY" in Dockerfile, so it creates a snapshot in the production
 
 </details>
 
