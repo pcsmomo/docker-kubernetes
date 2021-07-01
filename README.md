@@ -290,6 +290,10 @@ docker start feedback-app
 http://localhost:3000/feedback/awesome.txt \
 -> awesome.txt exists
 
+### 50. Introducing Volumes
+
+**Volumes** are **folders on my host machine** hard drive which are **mounted** (“made available”, mapped) **into containers**
+
 </details>
 
 ---
