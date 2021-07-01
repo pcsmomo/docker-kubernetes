@@ -249,6 +249,16 @@ docker run -p 3000:80 --rm pcsmomo/node-hello-world
 
 > **⚠ Warning: It will find locally first even if the latest version is on the hub**
 
+### 46. Understanding Data Categories / Different Kinds of Data
+
+#### Docker Data
+
+- Application : Read-only, stored in Images
+- Temporary App Data : Read + Writ, temporary, stored in Containers
+  - e.g. entered user input
+- Permanent App Data : Read + Writ, permanent, stored in Containers & Volumes
+  - e.g. user accounts
+
 </details>
 
 ---
