@@ -410,7 +410,7 @@ After changing package.json and Dockerfile
 docker rmi feedback-node:volumes
 docker build -t feedback-node:volumes .
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app -v /app/node_modules feedback-node:volumes
-docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v (pwd):/app -v /app/node_modules feedback-node:volumes
+docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v pwd:/app -v /app/node_modules feedback-node:volumes
 ```
 
 Change server.js
@@ -435,6 +435,18 @@ We have used all different approaches
 # add ":ro" -> Docker container can't write on this volume
 # connect /app/temp to an anonymous volume
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app:ro -v /app/temp -v /app/node_modules feedback-node:volumes
+```
+
+### 61. Managing Docker Volumes
+
+```sh
+docker volume create --help
+docker volume create feedback-files
+docker volume inspect feedback
+# "Mountpoint": "/var/lib/docker/volumes/feedback/_data"
+# The path is inside of the virtual machine docker created
+
+docker volume rm feedback-files
 ```
 
 </details>
