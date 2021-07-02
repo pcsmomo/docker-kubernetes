@@ -676,6 +676,10 @@ frontend % docker run --name goals-frontend \
   goals-react
 ```
 
+### 98. Diving into the Compose File Configuration
+
+[Docker Compose](https://docs.docker.com/compose/)
+
 </details>
 
 ---

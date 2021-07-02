@@ -1,7 +1,25 @@
+# Indentation is very important here
 version: '3.8'
 services:
   mongodb:
+    # --rm -d are default options
+    image: 'mongo'
+    volumes:
+      - data:/data/db
+    # environment:
+    ## Using : (colon)
+    #   MONGO_INITDB_ROOT_USERNAME: noah
+    #   MONGO_INITDB_ROOT_PASSWORD: secret
+    ## using - (dash) and = (equals sign)
+    # - MONGO_INITDB_ROOT_USERNAME=noah
+    env_file:
+      - ./env/mongo.env
+    # All services are using the same default network, though it can be manually added
+    # networks:
+    #   - goals-net
+  # backend:
 
-  backend:
-
-  frontend:
+  # frontend:
+volumes:
+  # named volumes must be specified
+  data:
