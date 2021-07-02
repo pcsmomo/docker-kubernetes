@@ -520,7 +520,7 @@ docker run -d --name mongodb mongo
 docker container inspect mongodb
 # "IPAddress": "172.17.0.2",
 
-# Change "host.docker.internal" to "172.17.0.2" on app.js \
+# Change "host.docker.internal" to "172.17.0.2" on app.js
 docker build -t favorites-node .
 docker run --name favorites -d --rm -p 3000:3000 favorites-node
 
@@ -532,7 +532,7 @@ Run Postman and send data
 
 ```json
 // http://localhost:3000/favorites
-// method : Post
+// Method : Post
 // Body -> Raw, JSON
 {
   "name": "A New Hope",
@@ -542,6 +542,30 @@ Run Postman and send data
 ```
 
 http&#58;//localhost:3000/favorites -> works
+
+### 78. Introducing Docker Networks: Elegant Container to Container Communication
+
+```sh
+# Create a new network
+docker stop favorites
+docker stop mongodb
+docker container prune
+
+docker run -d --name mongodb --network favorites-net mongo
+# docker: Error response from daemon: network favorites-net not found.
+
+docker network --help
+docker network create favorites-net
+# with --network
+# it doesn't need -p flag
+docker rm mongodb
+docker run -d --name mongodb --network favorites-net mongo
+
+# Change "172.17.0.2" to "mongodb" on app.js
+# If both are the name network, using the container name, "mongodb" works
+docker build -t favorites-node .
+docker run --name favorites --network favorites-net -d --rm -p 3000:3000 favorites-node
+```
 
 </details>
 
