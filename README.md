@@ -401,6 +401,7 @@ docker logs feedback-app
 ```sh
 # add "v /app/node_modules" -> Connected to an anonymous volume
 # equivalent to "VOLUME [ "/app/node_modules" ]" on Dockerfile
+# -v /app/node_modules : Then /app folder will not overwrite them
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app -v /app/node_modules feedback-node:volumes
 ```
 
@@ -629,7 +630,7 @@ backend % docker run --name goals-backend --rm -d -p 80:80 --network goals-net g
 [Mongo DB Connection String URI Format](https://docs.mongodb.com/manual/reference/connection-string/)
 
 ```sh
-# Add a volume name to create Named Volume
+# create data volume to connect mongodb data
 docker run --name mongodb -v data:/data/db --rm -d --network goals-net mongo
 
 # Add Authentication
@@ -640,6 +641,27 @@ docker run --name mongodb -v data:/data/db --rm -d --network goals-net -e MONGO_
 # Add MongoDB authentication data to app.js and rebuild the backend server
 backend % docker build -t goals-node .
 backend % docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
+```
+
+### 91. Volumes, Bind Mounts & Polishing for the NodeJS Container
+
+```sh
+# Add nodemon
+backend % docker build -t goals-node .
+
+# create logs volume to connect /app/logs
+# the longer path has precedence than shorter path : /app/logs > /app
+# -v /app/node_modules : Then /app folder will not overwrite them
+backend % docker run --name goals-backend -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/05_docker_multi/backend:/app" -v logs:/app/logs -v /app/node_modules --rm -d -p 80:80 --network goals-net goals-node
+```
+
+```sh
+# Add ENV MONGODB_USERNAME and ENV MONGODB_PASSWORD to Dockerfile
+backend % docker build -t goals-node .
+
+# add -e MONGODB_USERNAME=noah
+# it will overwrite MONGODB_USERNAME from Dockerfile
+backend % docker run --name goals-backend -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/05_docker_multi/backend:/app" -v logs:/app/logs -v /app/node_modules -e MONGODB_USERNAME=noah --rm -d -p 80:80 --network goals-net goals-node
 ```
 
 </details>
