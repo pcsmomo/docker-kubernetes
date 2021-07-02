@@ -569,15 +569,34 @@ docker run --name favorites --network favorites-net -d --rm -p 3000:3000 favorit
 
 ### 86. Dockerizing the MongoDB Service
 
+MongoDB Server
+
 ```sh
 docker run --name mongodb --rm -d -p 27017:27017 mongo
 ```
 
 ### 87. Dockerizing the Node App
 
+Backend Server
+
 ```sh
 backend % docker build -t goals-node .
 backend % docker run --name goals-backend --rm -d -p 80:80 goals-node
+```
+
+### 88. Moving the React SPA into a Container
+
+Frontend Server
+
+```sh
+frontend % docker build -t goals-react .
+
+# it will stop the server
+frontend % docker run --name goals-frontend --rm -d -p 3000:3000 goals-react
+
+# add -it -> -i: interactive, -t: Allocate a pseudo-TTY
+# React project should run with -it flag
+frontend % docker run --name goals-frontend --rm -d -p 3000:3000 -it goals-react
 ```
 
 </details>
