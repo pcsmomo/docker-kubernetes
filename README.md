@@ -567,6 +567,12 @@ docker build -t favorites-node .
 docker run --name favorites --network favorites-net -d --rm -p 3000:3000 favorites-node
 ```
 
+### 86. Dockerizing the MongoDB Service
+
+```sh
+docker run --name mongodb --rm -d -p 27017:27017 mongo
+```
+
 </details>
 
 ---
