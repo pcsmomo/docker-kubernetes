@@ -742,6 +742,14 @@ docker container rm friendly_mendel
 docker run -it node npm init
 ```
 
+### 104. Building a First Utility Container
+
+```sh
+docker build -t node-util .
+docker run -it -v /Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/06_docker_utility-container:/app node-util npm init
+# package.json is crated on the local host machine
+```
+
 </details>
 
 ---
