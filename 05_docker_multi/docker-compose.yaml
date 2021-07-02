@@ -17,9 +17,26 @@ services:
     # All services are using the same default network, though it can be manually added
     # networks:
     #   - goals-net
-  # backend:
-
+  backend:
+    build: ./backend
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    #   args:
+    #     some-arg: 1
+    ports:
+      - '80:80'
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    env_file:
+      - ./env/backend.env
+    depends_on:
+      - mongodb
   # frontend:
 volumes:
-  # named volumes must be specified
+  # Named Volumes must be specified
+  # Anonymous Volumes and Bind Mounts are not
   data:
+  logs:

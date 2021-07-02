@@ -680,6 +680,8 @@ frontend % docker run --name goals-frontend \
 
 [Docker Compose](https://docs.docker.com/compose/)
 
+[Compose file version 3 reference](https://docs.docker.com/compose/compose-file/compose-file-v3/)
+
 ### 95. Docker Compose Up & Down
 
 ```sh
@@ -694,6 +696,17 @@ docker-compose down
 # including volumes
 docker-compose down -v
 ```
+
+### 96. Working with Multiple Containers
+
+```sh
+docker-compose up -d
+docker-compose down
+```
+
+> The services were created under the name "05_docker_multi_backend_1" and"05_docker_multi_mongodb_1" \
+> The backend server, 'mongodb://mongodb:27017/course-goals' is connecting to mongodb not to 05_docker_multi_mongodb_1 \
+> As we create the service name, mongodb on docker-compose.yaml, it works just fine.
 
 </details>
 
