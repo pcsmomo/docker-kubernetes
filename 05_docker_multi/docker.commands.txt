@@ -1,0 +1,59 @@
+-----------------------------
+Create Network
+-----------------------------
+
+docker network create goals-net
+
+
+-----------------------------
+Run MongoDB Container
+-----------------------------
+
+docker run --name mongodb \
+  -e MONGO_INITDB_ROOT_USERNAME=noah \
+  -e MONGO_INITDB_ROOT_PASSWORD=secret \
+  -v data:/data/db \
+  --rm \
+  -d \
+  --network goals-net \
+  mongo
+
+-----------------------------
+Build Node API Image
+-----------------------------
+
+docker build -t goals-node .
+
+-----------------------------
+Build Node API Container
+-----------------------------
+
+docker run --name goals-backend \
+  -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/05_docker_multi/backend:/app" \
+  -v logs:/app/logs \
+  -v /app/node_modules \
+  -e MONGODB_USERNAME=noah \
+  --rm \
+  -d \
+  -p 80:80 \
+  --network goals-net \
+  goals-node
+
+
+-----------------------------
+Build React SPA Image
+-----------------------------
+
+docker build -t goals-react .
+
+-----------------------------
+Run React SPA Container
+-----------------------------
+
+docker run --name goals-frontend \
+  -v /Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/05_docker_multi/frontend/src:/app/src  \
+  --rm  \
+  -d  \
+  -p 3000:3000  \
+  -it  \
+  goals-react
