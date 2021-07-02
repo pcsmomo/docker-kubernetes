@@ -33,8 +33,8 @@ app.get('/goals', async (req, res) => {
     res.status(200).json({
       goals: goals.map((goal) => ({
         id: goal.id,
-        text: goal.text,
-      })),
+        text: goal.text
+      }))
     });
     console.log('FETCHED GOALS');
   } catch (err) {
@@ -54,7 +54,7 @@ app.post('/goals', async (req, res) => {
   }
 
   const goal = new Goal({
-    text: goalText,
+    text: goalText
   });
 
   try {
@@ -84,10 +84,10 @@ app.delete('/goals/:id', async (req, res) => {
 });
 
 mongoose.connect(
-  'mongodb://localhost:27017/course-goals',
+  'mongodb://host.docker.internal:27017/course-goals',
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
   },
   (err) => {
     if (err) {

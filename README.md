@@ -573,6 +573,13 @@ docker run --name favorites --network favorites-net -d --rm -p 3000:3000 favorit
 docker run --name mongodb --rm -d -p 27017:27017 mongo
 ```
 
+### 87. Dockerizing the Node App
+
+```sh
+backend % docker build -t goals-node .
+backend % docker run --name goals-backend --rm -d -p 80:80 goals-node
+```
+
 </details>
 
 ---
