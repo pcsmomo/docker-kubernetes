@@ -758,6 +758,12 @@ docker run -it -v /Users/noah/Documents/Study/Study_devops/udemy/docker-kubernet
 docker run -it -v /Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/06_docker_utility-container:/app mynpm install express --save
 ```
 
+### 106. Using Docker Compose
+
+```sh
+docker-compose run --rm npm-container init
+```
+
 </details>
 
 ---
