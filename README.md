@@ -509,7 +509,39 @@ http&#58;//localhost:3000/people -> works
 ### 76. Making Container to Host Communication Work
 
 Change localhost to "host.docker.internal" on app.js \
+Re build the image and run \
 http&#58;//localhost:3000/favorites -> works if mongodb is installed on the host machine
+
+### 77. Container to Container Communication: A Basic Solution
+
+```sh
+docker run mongo
+docker run -d --name mongodb mongo
+docker container inspect mongodb
+# "IPAddress": "172.17.0.2",
+
+# Change "host.docker.internal" to "172.17.0.2" on app.js \
+docker build -t favorites-node .
+docker run --name favorites -d --rm -p 3000:3000 favorites-node
+
+# Now two containers are running
+docker ps
+```
+
+Run Postman and send data
+
+```json
+// http://localhost:3000/favorites
+// method : Post
+// Body -> Raw, JSON
+{
+  "name": "A New Hope",
+  "type": "movie",
+  "url": "http://swapi.dev/api/films/1/"
+}
+```
+
+http&#58;//localhost:3000/favorites -> works
 
 </details>
 
