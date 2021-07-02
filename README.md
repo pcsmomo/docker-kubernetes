@@ -117,7 +117,7 @@ RUN npm install
 COPY . /app
 ```
 
-### 29. Stopping & Restarting Containers
+### 28. Stopping & Restarting Containers
 
 ```sh
 # help
@@ -147,7 +147,7 @@ docker logs -f nifty_archimedes
 docker logs nifty_archimedes
 ```
 
-### 32. Entering Interactive Mode
+### 31. Entering Interactive Mode
 
 ```sh
 # To interact with an utility application not web server
@@ -158,7 +158,7 @@ docker run -it 66b7c26c279eb426620747dbd8b25c5dd410a2161fbbc743e8db2bc7dafe9f2
 docker start -ai priceless_tereshkova
 ```
 
-### 33. Deleting Images & Containers
+### 32. Deleting Images & Containers
 
 ```sh
 # remove docker containers
@@ -174,21 +174,21 @@ docker rmi 52bdb6aaae5a d9c36df3c92e
 docker rmi prune
 ```
 
-### 34. Removing Stopped Containers Automatically
+### 33. Removing Stopped Containers Automatically
 
 ```sh
 # -p -rm : Automatically remove the container when it exits
 docker run -p 3000:80 -d --rm 0b260664df6f
 ```
 
-## 35. A Look Behind the Scenes: Inspecting Images
+## 34. A Look Behind the Scenes: Inspecting Images
 
 ```sh
 docker image inspect 66b7c26c279e
 # Those layers are based on Docker file commands and the original image on FROM
 ```
 
-## 36. Copying Files Into & From A Container
+## 35. Copying Files Into & From A Container
 
 Use case \
 : copying out the latest log files from the running container
@@ -200,7 +200,7 @@ docker cp thirsty_yalow:/test dummy/.
 docker cp thirsty_yalow:/test/test.txt dummy/.
 ```
 
-### 37. Naming & Tagging Containers and Images
+### 36. Naming & Tagging Containers and Images
 
 ```sh
 # naming containers
@@ -213,14 +213,14 @@ docker build -t goals:latest .
 docker run -p 3000:80 -d --rm --name goalsapp goals:latest
 ```
 
-### 38. Time to Practice: Images & Containers 1 question
+### Asgmt. Time to Practice: Images & Containers 1 question
 
 > Maximilian clarified the version/tag of node and python on Dockerfile.
 > FROM node:14
 > FROM python:3.7
 > That looks better for sure.
 
-### 40. Pushing Images to DockerHub
+### 38. Pushing Images to DockerHub
 
 ```sh
 # docker build -t pcsmomo/node-hello-world .
@@ -235,7 +235,7 @@ docker push pcsmomo/node-hello-world
 # it pushes exclude libraries existed on docker hub
 ```
 
-### 41. Pulling & Using Shared Images
+### 39. Pulling & Using Shared Images
 
 ```sh
 # remove all images, except images related to running containers
@@ -251,7 +251,7 @@ docker run -p 3000:80 --rm pcsmomo/node-hello-world
 
 > **⚠ Warning: It will find locally first even if the latest version is on the hub**
 
-### 46. Understanding Data Categories / Different Kinds of Data
+### 43. Understanding Data Categories / Different Kinds of Data
 
 #### Docker Data
 
@@ -261,7 +261,7 @@ docker run -p 3000:80 --rm pcsmomo/node-hello-world
 - Permanent App Data : Read + Writ, permanent, stored in Containers & Volumes
   - e.g. user accounts
 
-### 48. Building & Understanding the Demo App
+### 45. Building & Understanding the Demo App
 
 ```sh
 docker build -t feedback-node .
@@ -272,7 +272,7 @@ After writing a feedback \
 http&#58;//localhost:3000/feedback/awesome.txt \
 -> awesome.txt is saved on the container only
 
-### 49. Understanding the Problem
+### 46. Understanding the Problem
 
 ```sh
 docker stop feedback-app
@@ -336,7 +336,7 @@ docker run -p 3000:80 -d --name feedback-app --rm feedback-node:volumes
 http&#58;//localhost:3000/feedback/awesome.txt \
 -> WTF? still awesome.txt doesn't exist
 
-### 52. Named Volumes To The Rescue!
+### 49. Named Volumes To The Rescue!
 
 ![Two Types of External Data Storages](resources/03_two-types-of-external-data-storages.jpg 'Two Types of External Data Storages')
 
@@ -378,7 +378,7 @@ docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feed
 
 http&#58;//localhost:3000/feedback/awesome.txt -> Ta-da
 
-### 54. Getting Started With Bind Mounts (Code Sharing)
+### 51. Getting Started With Bind Mounts (Code Sharing)
 
 ```sh
 # add "-v [absolute path of local machine]:[container-internal path]"
@@ -396,7 +396,7 @@ docker logs feedback-app
 # Error: Cannot find module 'express'
 ```
 
-### 56. Combining & Merging Different Volumes
+### 53. Combining & Merging Different Volumes
 
 ```sh
 # add "v /app/node_modules" -> Connected to an anonymous volume
@@ -407,7 +407,7 @@ docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "
 
 If feedback.html on local changes, it will display on the browser.
 
-### 57. A NodeJS-specific Adjustment: Using Nodemon in a Container
+### 54. A NodeJS-specific Adjustment: Using Nodemon in a Container
 
 After changing package.json and Dockerfile
 
@@ -426,7 +426,7 @@ http&#58;//localhost:3000 -> Submit awesome feedback again
 docker logs feedback-app
 ```
 
-### 58. Volumes & Bind Mounts: Summary
+### 55. Volumes & Bind Mounts: Summary
 
 We have used all different approaches
 
@@ -434,7 +434,7 @@ We have used all different approaches
 - docker run –v [volume name]:/app/data ... : Named Volume
 - docker run –v [physical path]:/app/data ... : Bind Mount
 
-### 60. A Look at Read-Only Volumes
+### 56. A Look at Read-Only Volumes
 
 ```sh
 # add ":ro" -> Docker container can't write on this volume
@@ -442,7 +442,7 @@ We have used all different approaches
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01":/app:ro -v /app/temp -v /app/node_modules feedback-node:volumes
 ```
 
-### 61. Managing Docker Volumes
+### 57. Managing Docker Volumes
 
 ```sh
 docker volume create --help
@@ -454,14 +454,14 @@ docker volume inspect feedback
 docker volume rm feedback-files
 ```
 
-## 62. Using "COPY" vs Bind Mounts
+## 58. Using "COPY" vs Bind Mounts
 
 -v [absolute path of local machine]:[container-internal path]
 
 > Bind Mounts option is for a developer mode to reflect changes rapidly. \
 > Better keep "COPY" in Dockerfile, so it creates a snapshot in the production
 
-## 65. Working with Environment Variables & ".env" Files
+## 61. Working with Environment Variables & ".env" Files
 
 ```sh
 # Using ENV from Dockerfile
@@ -478,12 +478,12 @@ docker run -d --rm -p 3000:8000 -e PORT=8000 --name feedback-app -v feedback:/ap
 docker run -d --rm -p 3000:8000 --env-file ./.env --name feedback-app -v feedback:/app/feedback -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/03_data-volumes/03_data-volumes-01:/app:ro" -v /app/temp -v /app/node_modules feedback-node:env
 ```
 
-## 66. Environment Variables & Security
+## 62. Environment Variables & Security
 
 > **⚠ Warning: ENV on Dockerfile can be exposed through "docker history \<image\>"** \
 > For credentials and private keys, use .env and do not commit to github.
 
-### 67. Using Build Arguments (ARG)
+### 63. Using Build Arguments (ARG)
 
 ```sh
 # Using Dockerfile
@@ -492,7 +492,7 @@ docker build -t feedback-node:web-app .
 docker build -t feedback-node:dev --build-arg DEFAULT_PORT=8000 .
 ```
 
-## 75. Creating a Container & Communicating to the Web (WWW)
+## 71. Creating a Container & Communicating to the Web (WWW)
 
 ```sh
 docker build -t favorites-node .
@@ -507,13 +507,13 @@ docker run --name favorites -d --rm -p 3000:3000 favorites-node
 http&#58;//localhost:3000/movies -> works \
 http&#58;//localhost:3000/people -> works
 
-### 76. Making Container to Host Communication Work
+### 72. Making Container to Host Communication Work
 
 Change localhost to "host.docker.internal" on app.js \
 Re build the image and run \
 http&#58;//localhost:3000/favorites -> works if mongodb is installed on the host machine
 
-### 77. Container to Container Communication: A Basic Solution
+### 73. Container to Container Communication: A Basic Solution
 
 ```sh
 docker run mongo
@@ -544,7 +544,7 @@ Run Postman and send data
 
 http&#58;//localhost:3000/favorites -> works
 
-### 78. Introducing Docker Networks: Elegant Container to Container Communication
+### 74. Introducing Docker Networks: Elegant Container to Container Communication
 
 ```sh
 # Create a new network
@@ -568,7 +568,7 @@ docker build -t favorites-node .
 docker run --name favorites --network favorites-net -d --rm -p 3000:3000 favorites-node
 ```
 
-### 86. Dockerizing the MongoDB Service
+### 81. Dockerizing the MongoDB Service
 
 MongoDB Server
 
@@ -576,7 +576,7 @@ MongoDB Server
 docker run --name mongodb --rm -d -p 27017:27017 mongo
 ```
 
-### 87. Dockerizing the Node App
+### 82. Dockerizing the Node App
 
 Backend Server
 
@@ -585,7 +585,7 @@ backend % docker build -t goals-node .
 backend % docker run --name goals-backend --rm -d -p 80:80 goals-node
 ```
 
-### 88. Moving the React SPA into a Container
+### 83. Moving the React SPA into a Container
 
 Frontend Server
 
@@ -600,7 +600,7 @@ frontend % docker run --name goals-frontend --rm -d -p 3000:3000 goals-react
 frontend % docker run --name goals-frontend --rm -d -p 3000:3000 -it goals-react
 ```
 
-### 89. Adding Docker Networks for Efficient Cross-Container Communication
+### 84. Adding Docker Networks for Efficient Cross-Container Communication
 
 ```sh
 docker network create goals-net
@@ -623,7 +623,7 @@ frontend % docker run --name goals-frontend --rm -d -p 3000:3000 -it goals-react
 backend % docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
 ```
 
-### 90. Adding Data Persistence to MongoDB with Volumes
+### 85. Adding Data Persistence to MongoDB with Volumes
 
 [Mongo Docker Official Image](https://hub.docker.com/_/mongo)
 
@@ -643,7 +643,7 @@ backend % docker build -t goals-node .
 backend % docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
 ```
 
-### 91. Volumes, Bind Mounts & Polishing for the NodeJS Container
+### 86. Volumes, Bind Mounts & Polishing for the NodeJS Container
 
 ```sh
 # Add nodemon
@@ -664,7 +664,7 @@ backend % docker build -t goals-node .
 backend % docker run --name goals-backend -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/05_docker_multi/backend:/app" -v logs:/app/logs -v /app/node_modules -e MONGODB_USERNAME=noah --rm -d -p 80:80 --network goals-net goals-node
 ```
 
-### 92. Live Source Code Updates for the React Container (with Bind Mounts)
+### 87. Live Source Code Updates for the React Container (with Bind Mounts)
 
 ```sh
 frontend % docker run --name goals-frontend \
@@ -676,7 +676,7 @@ frontend % docker run --name goals-frontend \
   goals-react
 ```
 
-### 98. Diving into the Compose File Configuration
+### 93. Diving into the Compose File Configuration
 
 [Docker Compose](https://docs.docker.com/compose/)
 
