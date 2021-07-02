@@ -727,6 +727,21 @@ docker-compose down
 docker-compose build
 ```
 
+### 103. Different Ways of Running Commands in Containers
+
+```sh
+# a long process... to use only "npm init"
+docker run -it -d node
+docker exec friendly_mendel node -v
+docker exec -it friendly_mendel npm init
+# it will create package.json, but inside the container
+docker stop friendly_mendel
+docker container rm friendly_mendel
+
+# Make the process short
+docker run -it node npm init
+```
+
 </details>
 
 ---
