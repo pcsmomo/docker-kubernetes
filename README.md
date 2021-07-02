@@ -750,6 +750,14 @@ docker run -it -v /Users/noah/Documents/Study/Study_devops/udemy/docker-kubernet
 # package.json is crated on the local host machine
 ```
 
+### 105. Utilizing ENTRYPOINT
+
+```sh
+docker build -t mynpm .
+docker run -it -v /Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/06_docker_utility-container:/app mynpm init
+docker run -it -v /Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/06_docker_utility-container:/app mynpm install express --save
+```
+
 </details>
 
 ---
