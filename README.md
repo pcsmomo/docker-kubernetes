@@ -680,6 +680,21 @@ frontend % docker run --name goals-frontend \
 
 [Docker Compose](https://docs.docker.com/compose/)
 
+### 95. Docker Compose Up & Down
+
+```sh
+docker image prune -a
+
+docker-compose up
+# detached mode
+docker-compose up -d
+
+# removing containers and networks
+docker-compose down
+# including volumes
+docker-compose down -v
+```
+
 </details>
 
 ---
