@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.get('/favorites', async (req, res) => {
   const favorites = await Favorite.find();
   res.status(200).json({
-    favorites: favorites,
+    favorites: favorites
   });
 });
 
@@ -36,7 +36,7 @@ app.post('/favorites', async (req, res) => {
   const favorite = new Favorite({
     name: favName,
     type: favType,
-    url: favUrl,
+    url: favUrl
   });
 
   try {
@@ -67,14 +67,16 @@ app.get('/people', async (req, res) => {
   }
 });
 
-mongoose.connect(
-  'mongodb://localhost:27017/swfavorites',
-  { useNewUrlParser: true },
-  (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      app.listen(3000);
-    }
-  }
-);
+app.listen(3000);
+
+// mongoose.connect(
+//   'mongodb://localhost:27017/swfavorites',
+//   { useNewUrlParser: true },
+//   (err) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       app.listen(3000);
+//     }
+//   }
+// );

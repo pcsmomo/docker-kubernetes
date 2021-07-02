@@ -491,6 +491,20 @@ docker build -t feedback-node:web-app .
 docker build -t feedback-node:dev --build-arg DEFAULT_PORT=8000 .
 ```
 
+## 75. Creating a Container & Communicating to the Web (WWW)
+
+```sh
+docker build -t favorites-node .
+# it clasehs as it can't connect 'mongodb://localhost:27017/swfavorites'
+docker run --name favorites -d --rm -p 3000:3000 favorites-node
+docker run --name favorites --rm -p 3000:3000 favorites-node
+
+# comment the mongoose part on app.js
+docker run --name favorites -d --rm -p 3000:3000 favorites-node
+# http://localhost:3000/movies -> works
+# http://localhost:3000/people -> works
+```
+
 </details>
 
 ---
