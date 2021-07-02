@@ -664,6 +664,18 @@ backend % docker build -t goals-node .
 backend % docker run --name goals-backend -v "/Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/05_docker_multi/backend:/app" -v logs:/app/logs -v /app/node_modules -e MONGODB_USERNAME=noah --rm -d -p 80:80 --network goals-net goals-node
 ```
 
+### 92. Live Source Code Updates for the React Container (with Bind Mounts)
+
+```sh
+frontend % docker run --name goals-frontend \
+  -v /Users/noah/Documents/Study/Study_devops/udemy/docker-kubernetes/docker-kubernetes-git/05_docker_multi/frontend/src:/app/src  \
+  --rm  \
+  -d  \
+  -p 3000:3000  \
+  -it  \
+  goals-react
+```
+
 </details>
 
 ---
