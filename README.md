@@ -269,7 +269,7 @@ docker run -p 3000:80 -d --name feedback-app --rm feedback-node
 ```
 
 After writing a feedback \
-http://localhost:3000/feedback/awesome.txt \
+http&#58;//localhost:3000/feedback/awesome.txt \
 -> awesome.txt is saved on the container only
 
 ### 49. Understanding the Problem
@@ -281,7 +281,7 @@ docker stop feedback-app
 docker run -p 3000:80 -d --name feedback-app feedback-node
 ```
 
-http://localhost:3000/feedback/awesome.txt \
+http&#58;//localhost:3000/feedback/awesome.txt \
 -> Can't reach awesome.txt because it's removed when the container deleted.
 
 ```sh
@@ -289,7 +289,7 @@ docker stop feedback-app
 docker start feedback-app
 ```
 
-http://localhost:3000/feedback/awesome.txt \
+http&#58;//localhost:3000/feedback/awesome.txt \
 -> awesome.txt exists
 
 ### 50. Introducing Volumes
@@ -308,7 +308,7 @@ docker rm feedback-app
 docker run -p 3000:80 -d --name feedback-app --rm feedback-node:volumes
 ```
 
-http://localhost:3000 \
+http&#58;//localhost:3000 \
 -> It won't save the file because cross-device error
 
 ```sh
@@ -325,7 +325,7 @@ docker build -t feedback-node:volumes .
 docker run -p 3000:80 -d --name feedback-app --rm feedback-node:volumes
 ```
 
-http://localhost:3000 -> Submit awesome feedback again
+http&#58;//localhost:3000 -> Submit awesome feedback again
 
 ```sh
 # Kill the old container(--rm) and run a new container
@@ -333,7 +333,7 @@ docker stop feedback-app
 docker run -p 3000:80 -d --name feedback-app --rm feedback-node:volumes
 ```
 
-http://localhost:3000/feedback/awesome.txt \
+http&#58;//localhost:3000/feedback/awesome.txt \
 -> WTF? still awesome.txt doesn't exist
 
 ### 52. Named Volumes To The Rescue!
@@ -365,7 +365,7 @@ docker build -t feedback-node:volumes .
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback-node:volumes
 ```
 
-http://localhost:3000 -> Submit awesome feedback again
+http&#58;//localhost:3000 -> Submit awesome feedback again
 
 ```sh
 # Stop/remove the container and run a new container
@@ -376,7 +376,7 @@ docker volume ls
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback-node:volumes
 ```
 
-http://localhost:3000/feedback/awesome.txt -> Ta-da
+http&#58;//localhost:3000/feedback/awesome.txt -> Ta-da
 
 ### 54. Getting Started With Bind Mounts (Code Sharing)
 
@@ -419,7 +419,7 @@ docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v p
 
 Change server.js
 
-http://localhost:3000 -> Submit awesome feedback again
+http&#58;//localhost:3000 -> Submit awesome feedback again
 
 ```sh
 docker logs feedback-app
@@ -501,9 +501,15 @@ docker run --name favorites --rm -p 3000:3000 favorites-node
 
 # comment the mongoose part on app.js
 docker run --name favorites -d --rm -p 3000:3000 favorites-node
-# http://localhost:3000/movies -> works
-# http://localhost:3000/people -> works
 ```
+
+http&#58;//localhost:3000/movies -> works \
+http&#58;//localhost:3000/people -> works
+
+### 76. Making Container to Host Communication Work
+
+Change localhost to "host.docker.internal" on app.js \
+http&#58;//localhost:3000/favorites -> works if mongodb is installed on the host machine
 
 </details>
 

@@ -67,16 +67,14 @@ app.get('/people', async (req, res) => {
   }
 });
 
-app.listen(3000);
-
-// mongoose.connect(
-//   'mongodb://localhost:27017/swfavorites',
-//   { useNewUrlParser: true },
-//   (err) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       app.listen(3000);
-//     }
-//   }
-// );
+mongoose.connect(
+  'mongodb://host.docker.internal:27017/swfavorites',
+  { useNewUrlParser: true },
+  (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      app.listen(3000);
+    }
+  }
+);
