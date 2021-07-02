@@ -4,6 +4,8 @@ services:
   mongodb:
     # --rm -d are default options
     image: 'mongo'
+    # The container name will be path_service-name if container_name is not defined
+    container_name: mongodb
     volumes:
       - data:/data/db
     # environment:
@@ -24,6 +26,7 @@ services:
     #   dockerfile: Dockerfile
     #   args:
     #     some-arg: 1
+    container_name: goals-backend
     ports:
       - '80:80'
     volumes:
@@ -36,6 +39,7 @@ services:
       - mongodb
   frontend:
     build: ./frontend
+    container_name: goals-frontend
     ports:
       - '3000:3000'
     volumes:

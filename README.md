@@ -720,14 +720,13 @@ docker-compose up -d
 docker-compose down
 ```
 
+### 98. Building Images & Understanding Container Names
+
+```sh
+# it only builds but doesn't starts containers
+docker-compose build
+```
+
 </details>
 
 ---
-
-## What I have learned from this course
-
--
-
-## Next Step
-
--
