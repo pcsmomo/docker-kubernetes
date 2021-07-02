@@ -708,6 +708,18 @@ docker-compose down
 > The backend server, 'mongodb://mongodb:27017/course-goals' is connecting to mongodb not to 05_docker_multi_mongodb_1 \
 > As we create the service name, mongodb on docker-compose.yaml, it works just fine.
 
+### 97. Adding Another Container
+
+```sh
+docker-compose up -d
+# Creating network "05_docker_multi_default" with the default driver
+# Creating 05_docker_multi_mongodb_1 ... done
+# Creating 05_docker_multi_backend_1 ... done
+# Creating 05_docker_multi_frontend_1 ... done
+
+docker-compose down
+```
+
 </details>
 
 ---

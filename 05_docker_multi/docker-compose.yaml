@@ -34,7 +34,17 @@ services:
       - ./env/backend.env
     depends_on:
       - mongodb
-  # frontend:
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend/src:/app/src
+    # -it options
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
 volumes:
   # Named Volumes must be specified
   # Anonymous Volumes and Bind Mounts are not
