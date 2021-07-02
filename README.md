@@ -599,6 +599,29 @@ frontend % docker run --name goals-frontend --rm -d -p 3000:3000 goals-react
 frontend % docker run --name goals-frontend --rm -d -p 3000:3000 -it goals-react
 ```
 
+### 89. Adding Docker Networks for Efficient Cross-Container Communication
+
+```sh
+docker network create goals-net
+
+# MongoDB Server
+# We no longer need to publish ports
+docker run --name mongodb --rm -d --network goals-net mongo
+
+# Backend Server not publishing 80 port
+# Need to fix app.js to use the mongodb container name
+backend % docker build -t goals-node .
+backend % docker run --name goals-backend --rm -d --network goals-net goals-node
+
+# Frontend Server
+# NO need to fix App.js to use the goals-backend container name
+# Because it is working on the browser so it still needs to use localhost
+frontend % docker run --name goals-frontend --rm -d -p 3000:3000 -it goals-react
+
+# Bakenc Server publishing the port
+backend % docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
+```
+
 </details>
 
 ---
