@@ -829,6 +829,18 @@ http&#58;//localhost:8000 -> h1 tag appears
 docker-compose run --rm artisan migrate
 ```
 
+### 121. Bind Mounts and COPY: When To Use What
+
+```sh
+docker-compose down
+docker-compose up -d --build server
+# http://localhost:8000 -> Permission denied
+
+# add the permision on php.dockerfile
+docker-compose down
+docker-compose up -d --build server
+```
+
 </details>
 
 ---
