@@ -968,6 +968,27 @@ sudo docker pull pcsmomo/node-example-1-aws
 sudo docker run -d --rm -p 80:80 pcsmomo/node-example-1-aws
 ```
 
+### 138. Deploying with AWS ECS: A Managed Docker Container Service
+
+1. Connect AWS ECS and Click Get Started
+2. Container definition -> Custom-app -> Configure
+
+   - <!-- This is configure docker run [options] -->
+   - Container name: node-demo (--name)
+   - image: pcsmomo/node-example-1-aws
+   - Port mappings: 80 (-p 80:80)
+   - Environment - Entry Point, Command,Working directory and Environment variables
+   - Storage and Logging
+     - Storage is equivalent to (-v)
+     - Check on Log configuration to see logs
+
+3. Task definition
+   - Compatibilities FARGATE (Serverless, it runs only when it is excuted, cost-effective)
+4. Service : we could set up Load Balancer, but not now
+5. Cluster : multiple containers would run in this same Cluster
+6. Create!
+7. View Service -> tasks -> click running task -> find Public IP and go!
+
 </details>
 
 ---
