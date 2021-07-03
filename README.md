@@ -764,9 +764,21 @@ docker run -it -v /Users/noah/Documents/Study/Study_devops/udemy/docker-kubernet
 docker-compose run --rm npm-container init
 ```
 
+### 112. Adding a Nginx (Web Server) Container
+
+[Nginx Docker Hub](https://hub.docker.com/_/nginx)
+
 ### 113. Adding a PHP Container
 
+[PHP Docker Hub](https://hub.docker.com/_/php)
+
 [php dockerfile](https://github.com/docker-library/php/blob/master/7.3/alpine3.13/fpm/Dockerfile)
+
+### 114. Adding a MySQL Container
+
+[MySQL Docker Hub](https://hub.docker.com/_/mysql)
+
+homestead is laravel's default database name
 
 </details>
 

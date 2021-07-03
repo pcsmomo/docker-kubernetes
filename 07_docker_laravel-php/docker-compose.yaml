@@ -14,7 +14,10 @@ services:
     volumes:
       - ./src:/var/www/html:delegated
     # No need to add port as nginx can directly communicate to php:9000
-  # mysql:
+  mysql:
+    image: mysql:5.7
+    env_file:
+      - ./env/mysql.env
   # composer:
   # artisan:
   # npm:
