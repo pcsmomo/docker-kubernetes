@@ -919,8 +919,8 @@ On Instance
 
 1. Click Connect
 2. Choose SSH Client and follow the steps
-3. chmod 444 example-1.cer (chmod 400 doesn't work on my local)
-4. ssh -i "example-1.cer" ec2-user@ec2-[X-XX-XXX-XX].ap-southeast-2.compute.amazonaws.com (IP address is different when restarted)
+3. chmod 400 example-1.cer
+4. sudo ssh -i "example-1.cer" ec2-user@ec2-[X-XX-XXX-XX].ap-southeast-2.compute.amazonaws.com (IP address is different when restarted)
 
 ### 130. Installing Docker on a Virtual Machine
 
@@ -953,6 +953,20 @@ Allow HTTP from Security Group on AWS
 2. Add inbound rules, HTTP from anywhere
 
 http&#58;//3.26.113.49/ -> Works
+
+### 134. Managing & Updating the Container / Image
+
+```sh
+# Change source codes
+docker build -t node-dep-example-1-aws .
+docker tag node-dep-example-1-aws pcsmomo/node-example-1-aws
+docker push pcsmomo/node-example-1-aws
+```
+
+```sh AWS
+sudo docker pull pcsmomo/node-example-1-aws
+sudo docker run -d --rm -p 80:80 pcsmomo/node-example-1-aws
+```
 
 </details>
 
