@@ -920,7 +920,15 @@ On Instance
 1. Click Connect
 2. Choose SSH Client and follow the steps
 3. chmod 444 example-1.cer (chmod 400 doesn't work on my local)
-4. ssh -i "example-1.cer" ec2-user@ec2-13-238-182-115.ap-southeast-2.compute.amazonaws.com
+4. ssh -i "example-1.cer" ec2-user@ec2-[X-XX-XXX-XX].ap-southeast-2.compute.amazonaws.com (IP address is different when restarted)
+
+### 130. Installing Docker on a Virtual Machine
+
+```sh
+sudo yum update -y
+sudo amazon-linux-extras install docker
+sudo service docker start
+```
 
 </details>
 
