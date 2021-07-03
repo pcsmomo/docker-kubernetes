@@ -819,8 +819,15 @@ docker-compose down
 docker-compose up -d --build server
 ```
 
-Add h1 tag on "src/resources/views/welcome.blade.php" to test.
+Add h1 tag on "src/resources/views/welcome.blade.php" to test. \
 http&#58;//localhost:8000 -> h1 tag appears
+
+### 119. Adding More Utility Containers
+
+```sh
+# database migration? create tables
+docker-compose run --rm artisan migrate
+```
 
 </details>
 
