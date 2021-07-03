@@ -710,6 +710,8 @@ docker-compose down
 
 ### 97. Adding Another Container
 
+✅ MongoDB + Node Backend Server + React (create-react-app) Server, succeeded
+
 ```sh
 docker-compose up -d
 # Creating network "05_docker_multi_default" with the default driver
@@ -839,6 +841,43 @@ docker-compose up -d --build server
 # add the permision on php.dockerfile
 docker-compose down
 docker-compose up -d --build server
+```
+
+### Laravel & PHP Commands Summary
+
+✅ Nginx + PHP + MySQL, All Servers Succeeded
+
+✅ Composer + Artisan (+ NPM), All Utility Containers Succeeded
+
+```sh
+# 1. Create a laravel project to /src
+docker-compose run --rm composer create-project laravel/laravel .
+
+# 2. Change database variables on /src/.env file
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+
+# 3. Run servers
+docker-compose up -d --build server
+
+# 4. Migrate database (Why does it need?)
+docker-compose run --rm artisan migrate
+# ERROR: Service 'artisan' failed to build : The command '/bin/sh -c docker-php-ext-install pdo pdo_mysql' returned a non-zero code: 11
+# Failed at the first attemption
+# probably a permission issue?
+
+docker-compose run --rm artisan migrate
+# Migration table created successfully.
+
+# 5. Clean up
+docker-compose down
+docker volume rm [volumes]
+docker network rm [volumes]
+docker images rm [volumes]
 ```
 
 </details>
