@@ -784,6 +784,14 @@ homestead is laravel's default database name
 
 [Composer Docker Hub](https://hub.docker.com/_/composer)
 
+### 116. Creating a Laravel App via the Composer Utility Container
+
+[Laravel installation via composer](https://laravel.com/docs/8.x/installation#installation-via-composer)
+
+```sh
+docker-compose run --rm composer create-project laravel/laravel .
+```
+
 </details>
 
 ---
