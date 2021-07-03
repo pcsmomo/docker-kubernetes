@@ -843,6 +843,10 @@ docker-compose down
 docker-compose up -d --build server
 ```
 
+### 122. Module Resources
+
+addgroup laravel and adduser laravel
+
 ### Laravel & PHP Commands Summary
 
 ✅ Nginx + PHP + MySQL, All Servers Succeeded
@@ -876,8 +880,8 @@ docker-compose run --rm artisan migrate
 # 5. Clean up
 docker-compose down
 docker volume rm [volumes]
-docker network rm [volumes]
-docker images rm [volumes]
+(docker network rm [networks])
+docker image rm [images]
 ```
 
 </details>
