@@ -792,6 +792,36 @@ homestead is laravel's default database name
 docker-compose run --rm composer create-project laravel/laravel .
 ```
 
+### 118. Launching Only Some Docker Compose Services
+
+```sh
+docker-compose up --help
+# Usage: up [options] [--scale SERVICE=NUM...] [--] [SERVICE...]
+
+docker-compose up -d server php mysql
+# nginx server is exited
+docker logs 07_docker_laravel-php_server_1
+# nginx: [emerg] "server" directive is not allowed here in /etc/nginx/nginx.conf:1
+
+# fix docker-compose.yaml
+docker-compose down
+docker-compose up -d server php mysql
+
+# add dependencies on docker-compose.yaml
+docker-compose down
+docker-compose up -d server
+# this is working correctly
+# but it will not rebuild images if the images exist
+
+# add --build
+# It will be quick as it is using cached one from the layer
+docker-compose down
+docker-compose up -d --build server
+```
+
+Add h1 tag on "src/resources/views/welcome.blade.php" to test.
+http&#58;//localhost:8000 -> h1 tag appears
+
 </details>
 
 ---
