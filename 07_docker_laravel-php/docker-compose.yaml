@@ -18,6 +18,11 @@ services:
     image: mysql:5.7
     env_file:
       - ./env/mysql.env
-  # composer:
+  composer:
+    build:
+      context: ./dockerfiles
+      dockerfile: composer.dockerfile
+    volumes:
+      - ./src:/var/www/html
   # artisan:
   # npm:
