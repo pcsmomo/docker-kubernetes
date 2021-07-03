@@ -939,6 +939,21 @@ docker login
 docker push pcsmomo/node-example-1-aws
 ```
 
+### 133. Running & Publishing the App (on EC2)
+
+```sh AWS
+sudo docker run -d --rm -p 80:80 pcsmomo/node-example-1-aws
+```
+
+http&#58;//3.26.113.49/ -> This site can't be reached \
+
+Allow HTTP from Security Group on AWS
+
+1. EC2 -> My Instance running -> Security -> Select the Security groups
+2. Add inbound rules, HTTP from anywhere
+
+http&#58;//3.26.113.49/ -> Works
+
 </details>
 
 ---
