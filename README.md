@@ -968,6 +968,8 @@ sudo docker pull pcsmomo/node-example-1-aws
 sudo docker run -d --rm -p 80:80 pcsmomo/node-example-1-aws
 ```
 
+---
+
 ### 138. Deploying with AWS ECS: A Managed Docker Container Service
 
 1. Connect AWS ECS and Click Get Started
@@ -987,7 +989,26 @@ sudo docker run -d --rm -p 80:80 pcsmomo/node-example-1-aws
 4. Service : we could set up Load Balancer, but not now
 5. Cluster : multiple containers would run in this same Cluster
 6. Create!
-7. View Service -> tasks -> click running task -> find Public IP and go!
+7. View Service -> tasks -> click running task -> find the Public IP and go!
+
+### 140. Updating Managed Containers
+
+```sh
+# Change source codes
+docker build -t node-dep-example-1-aws .
+docker tag node-dep-example-1-aws pcsmomo/node-example-1-aws
+docker push pcsmomo/node-example-1-aws
+```
+
+1. ECS -> Cluster -> default -> Tasks -> click running task definition (not task)
+2. Create new revision -> Create -> Update Service -> Skip to review -> Update Service
+3. Service -> Tasks -> New task with status Provisioning, Penging, Running \
+   The first task will be removed automatically
+4. Click the new task -> Find the Public IP and go! (different IP though)
+
+[Adding a Load Balancer to a Fargate task](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
+
+---
 
 </details>
 
