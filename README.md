@@ -8,7 +8,7 @@ This repository is to summarize this long lecture and it would not include much 
 
 ## Docker
 
-<details open>
+<details>
   <summary>Click to Contract/Expend</summary>
 
 ### 3. Why Docker & Containers?
@@ -888,7 +888,7 @@ docker image rm [images]
 
 ## Docker Deployment
 
-<details open>
+<details>
   <summary>Click to Contract/Expend</summary>
 
 ### 125. Deployment Process & Providers
@@ -905,6 +905,22 @@ Deploy to AWS EC2
 docker build -t node-dep-example .
 docker run -d --rm --name node-dep -p 80:80 node-dep-example
 ```
+
+### 129. Connecting to an EC2 Instance
+
+1. Go to AWS EC2
+2. Launch Instance
+3. Select Amazon Linux 2 AMI
+4. Choose all default options.
+5. Create new key pairs -> save it as "example-1.cer" on my local machine
+6. Launch
+
+On Instance
+
+1. Click Connect
+2. Choose SSH Client and follow the steps
+3. chmod 444 example-1.cer (chmod 400 doesn't work on my local)
+4. ssh -i "example-1.cer" ec2-user@ec2-13-238-182-115.ap-southeast-2.compute.amazonaws.com
 
 </details>
 
