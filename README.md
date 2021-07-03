@@ -924,10 +924,19 @@ On Instance
 
 ### 130. Installing Docker on a Virtual Machine
 
-```sh
+```sh AWS
 sudo yum update -y
 sudo amazon-linux-extras install docker
 sudo service docker start
+```
+
+### 132. Pushing our local Image to the Cloud
+
+```sh
+docker build -t node-dep-example-1-aws .
+docker tag node-dep-example-1-aws pcsmomo/node-example-1-aws
+docker login
+docker push pcsmomo/node-example-1-aws
 ```
 
 </details>
