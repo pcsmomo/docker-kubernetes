@@ -764,6 +764,10 @@ docker run -it -v /Users/noah/Documents/Study/Study_devops/udemy/docker-kubernet
 docker-compose run --rm npm-container init
 ```
 
+### 113. Adding a PHP Container
+
+[php dockerfile](https://github.com/docker-library/php/blob/master/7.3/alpine3.13/fpm/Dockerfile)
+
 </details>
 
 ---
