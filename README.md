@@ -974,7 +974,7 @@ sudo docker run -d --rm -p 80:80 pcsmomo/node-example-1-aws
 
 1. Connect AWS ECS and Click Get Started
 2. Container definition -> Custom-app -> Configure
-   - <!-- This is configure docker run [options] -->
+   - (This is configure docker run [options])
    - Container name: node-demo (--name)
    - image: pcsmomo/node-example-1-aws
    - Port mappings: 80 (-p 80:80)
@@ -999,7 +999,7 @@ docker push pcsmomo/node-example-1-aws
 ```
 
 1. ECS -> Cluster -> default -> Tasks -> click running task definition (not task)
-2. Create new revision -> Create -> Update Service -> Skip to review -> Update Service
+2. Create new revision -> Create -> Action -> Update Service -> Skip to review -> Update Service
 3. Service -> Tasks -> New task with status Provisioning, Penging, Running \
    The first task will be removed automatically
 4. Click the new task -> Find the Public IP and go! (different IP though)
@@ -1020,6 +1020,7 @@ And separately set up MONGODB_URL variable on AWS ECS.
 ```sh
 docker build -t goals-node ./backend
 docker tag goals-node pcsmomo/goals-node
+docker push pcsmomo/goals-node
 ```
 
 ### 142. Configuring the NodeJS Backend Container
@@ -1139,6 +1140,87 @@ Run Postman and send data
   "message": "Deleted goal!"
 }
 ```
+
+### 145. Using EFS Volumes with ECS
+
+```sh
+# Change app.js and re-launch the app
+docker build -t goals-node ./backend
+docker tag goals-node pcsmomo/goals-node
+docker push pcsmomo/goals-node
+```
+
+AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force new deployment: Check -> Skip to Review -> Update Service
+
+> No need to create a new revision
+
+!The service created the new task and the stored data has been lost.
+
+1. AWS ECS -> Task Definitions -> goals:latest -> Create new revision
+2. Add volume
+   - Name: data
+   - Volume type: EFS
+   - File system ID
+     1. Click Amazon EFS console to create a new file system
+        - Create file system
+          - Name: db-storage
+          - Virtual Private Cloud(VPC): choose the same VPC (vpc-0803a9dc38bf99d7e)
+          - Customize
+            1. Next: Network access -> we would have two subnet masks
+            2. New tab: AWS EC2 -> Security Groups -> Create security group
+               - Security group name: efs-sc
+               - Description: multiple container example sc to be added to the new EFS, db-storage
+               - VPC: the same VPC (vpc-0803a9dc38bf99d7e)
+               - Add Inbound rule
+                 - Type: NFS
+                 - Source: Security Groups - goals--xxxx | sg-xxxxxxx (managin my containers)
+               - Create security group
+            3. Previous and Next to refresh
+            4. Choose the new security group, efs-sc instead of the default one for both subnet masks
+            5. Next: File system policy
+            6. Next: Review and create
+            7. Create
+     2. refresh File system and select db-storage
+   - Access point: None (You can read the document if you don't want to create new EFS and use several access point on this volume)
+   - Add
+   - (This is a little bit as defining "data" volume with docker-compose )
+3. Connecting to the container
+   - click mongodb container
+     - Mount points
+       - Source Volume: data (the EFS volume name)
+       - Container path: /data/db
+       - (just the same as docker-compose.yaml, mongodb service)
+     - Update
+4. Create
+5. Action -> Update Service
+   - Platform version : Latest (Latest sometimes fails to run container then choose 1.4.0)
+   - Force new deployment: Check
+   - Skip to review
+   - Update Service
+6. Tasks -> New task will be PROVISIONING, PENDING and RUNNING
+
+Run Postman and save data
+
+```json
+// http://ecs-lb-2034865568.ap-southeast-2.elb.amazonaws.com/goals
+// Method : Post
+// Body -> Raw, JSON
+{
+  "text": "A third test!"
+}
+```
+
+Restart the service, then a new task will be created
+
+AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force new deployment: Check -> Skip to Review -> Update Service
+
+> ⚠ Warning 1: If I update service several times before the previous deployment finishes, those will be in a queue and will be processed in order
+
+> ⚠ Warning 2: In this scenario, the old task will be stopped, when the new task passes its health check. \
+> While both tasks are running at the same time, if users write data on both tasks, it will all write on the same EFS. \
+> we can stop the old task manually to prevent this problem. \
+> However, we will replace the mongodb container with a different solution soon. \
+> I guess it's MongoDB Atlas.
 
 </details>
 
