@@ -1079,10 +1079,13 @@ docker push pcsmomo/goals-node
            - Availability Zones: check both (ap-southeast-2a, ap-southeast-2b)
            - Next: Configure Security Settings
         2. Configure Security Settings : Basic (As we are not using HTTPS now)
-        3. Configure Security Groups : existing default one
+        3. (Changed)Configure Security Groups : check both default and goals--xxxx (This opens port 80 to incoming traffic)
         4. Configure Routing
            - Name: tg
            - Target type: IP
+           - (Changed)Health checkes
+             - Protocol: HTTP
+             - Path: /goals
         5. Register Targets: As is, ECS is automatically registering targets here.
         6. Next: Review -> Create
       - Refresh Load balancer name and choose ecs-lb
@@ -1293,6 +1296,92 @@ docker build -f frontend/Dockerfile.prod -t goals-react ./frontend
 docker tag goals-react pcsmomo/goals-react
 docker push pcsmomo/goals-react
 ```
+
+### 155. Deploying a Standalone Frontend App
+
+1. AWS ECS -> Task Definitions -> goals:latest -> Create new revision
+2. Add Container
+   - container name: goals-frontend
+   - image: pcsmomo/goals-react
+   - Port mappings: 80
+   - Startup Dependency Ordering
+     - Container name: goals-backend
+     - Condition: SUCCESS
+   - Add
+3. ⚠Create button is disabled
+   - Because backend and frontend containers are using the same port. 80
+   - Container ports and protocols combination must be unique within a Task definition
+4. Cancel
+
+Create a new task definition for goals-react
+
+1. AWS ECS -> Task Definitions -> Create new Task Definition
+   1. FARGATE -> Next Step
+      - Task Definition Name: goals-react
+      - Task Role : ecsTaskExecutionRole (the same as the backend)
+      - Task Memory : 0.5GB (minimum amount)
+      - Task CPU : 0.25 vCPU (minimum amount)
+      - Add container
+        - container name: goals-frontend
+        - image: pcsmomo/goals-react
+        - Port mappings: 80
+        - Add
+   2. Create
+2. Create a new load balancer
+   - Click EC2 Console to create a load balancer
+     1. Application Load Balancer, Configure
+        - Name: goals-react-lb
+        - Scheme: internet-facing
+        - VPC: choose the same VPC (vpc-0803a9dc38bf99d7e (10.0.0.0/16))
+        - Availability Zones: check both (ap-southeast-2a, ap-southeast-2b)
+        - Next: Configure Security Settings
+     2. Configure Security Settings : Basic (As we are not using HTTPS now)
+     3. Configure Security Groups : check both default and goals--xxxx (This opens port 80 to incoming traffic)
+     4. Configure Routing
+        - Target group: New target group
+        - Name: react-tg
+        - Target type: IP
+        - Health checkes
+          - Protocol: HTTP
+          - Path: /
+     5. Register Targets: As is, ECS is automatically registering targets here.
+     6. Next: Review
+     7. Create
+        - DNS name: goals-react-lb-1862629005.ap-southeast-2.elb.amazonaws.com
+
+⚠ So now, the url in App.js need to be changed as we have two separates services for backend and frontend
+
+```sh
+docker build -f frontend/Dockerfile.prod -t goals-react ./frontend
+docker tag goals-react pcsmomo/goals-react
+docker push pcsmomo/goals-react
+```
+
+1. Create Service
+   1. AWS ECS -> Cluster -> Services -> Create : Configure service
+      - Launch type: FARGATE
+      - Task Definition: goals-react
+      - Cluster: goals-app
+      - Service name: goals-react-service
+      - Number of tasks: 1
+      - Deployment type: Rolling update
+      - Next Step
+   2. Configure network
+      - Cluster VPC: choose the one when the cluster created (vpc-0803a9dc38bf99d7e (10.0.0.0/16))
+      - Subnets: Choose both subnets available (ap-southeast-2a, ap-southeast-2b)
+      - Security groups: Select existing security group (goals--3617, exposing port 80)
+      - Auto-assign public IP: ENABLED
+      - Load balancer type: Application Load Balancer (No load balancer is found)
+      - Load balancer name: goals-react-lb
+      - Container name : port : goals-frontend:80:80 -> Add to load balancer
+        - target group name: react-tg
+      - Next step
+   3. Set Auto Scaling (optional) : Do not adjust the service’s desired count
+   4. Review
+   5. Create Service
+2. Tasks -> the new task will be PROVISIONING, PENDING, and RUNNING
+
+http&#58;//goals-react-lb-1862629005.ap-southeast-2.elb.amazonaws.com
 
 </details>
 
