@@ -13,7 +13,7 @@ This repository is to summarize this long lecture and it would not include much 
 
 ### 3. Why Docker & Containers?
 
-Why would we want independent, standardized "application package"? \
+Why would we want an independent, standardized "application package"? \
 
 - We want to have the **exact same environment for development and production** \
   -> This ensures that it works exactly as tested
@@ -232,7 +232,7 @@ docker push pcsmomo/node-hello-world
 
 docker login
 docker push pcsmomo/node-hello-world
-# it pushes exclude libraries existed on docker hub
+# it pushes exclude libraries that existed on docker hub
 ```
 
 ### 39. Pulling & Using Shared Images
@@ -246,7 +246,7 @@ docker run -p 3000:80 --rm pcsmomo/node-hello-world
 
 docker rmi pcsmomo/node-hello-world
 docker run -p 3000:80 --rm pcsmomo/node-hello-world
-# If the image doesn't exist on local, it will reach to the hub automatically
+# If the image doesn't exist on local, it will reach the hub automatically
 ```
 
 > **⚠ Warning: It will find locally first even if the latest version is on the hub**
@@ -255,10 +255,10 @@ docker run -p 3000:80 --rm pcsmomo/node-hello-world
 
 #### Docker Data
 
-- Application : Read-only, stored in Images
-- Temporary App Data : Read + Writ, temporary, stored in Containers
+- Application: Read-only, stored in Images
+- Temporary App Data: Read + Write, temporary, stored in Containers
   - e.g. entered user input
-- Permanent App Data : Read + Writ, permanent, stored in Containers & Volumes
+- Permanent App Data: Read + Write, permanent, stored in Containers & Volumes
   - e.g. user accounts
 
 ### 45. Building & Understanding the Demo App
@@ -309,7 +309,7 @@ docker run -p 3000:80 -d --name feedback-app --rm feedback-node:volumes
 ```
 
 http&#58;//localhost:3000 \
--> It won't save the file because cross-device error
+-> It won't save the file because a cross-device error
 
 ```sh
 # Remove the old image and create a new image
@@ -342,7 +342,7 @@ http&#58;//localhost:3000/feedback/awesome.txt \
 
 > Anonymous Volumes will be **removed automatically**, when the container started with --rm, was stopped(and removed). \
 > However, if a container is started **without --rm**, the anonymous volume would **NOT be removed**, even if you remove the container. \
-> And **a new anonymous volume will be created**, when docker is re-created and re-run
+> And **a new anonymous volume will be created** when docker is re-created and re-run
 
 ```sh
 # Check and delete the Anonymous Volume
@@ -725,7 +725,7 @@ docker-compose down
 ### 98. Building Images & Understanding Container Names
 
 ```sh
-# it only builds but doesn't starts containers
+# it only builds but doesn't start containers
 docker-compose build
 ```
 
@@ -868,10 +868,10 @@ DB_PASSWORD=secret
 # 3. Run servers
 docker-compose up -d --build server
 
-# 4. Migrate database (Why does it need?)
+# 4. Migrate the database (Why does it need?)
 docker-compose run --rm artisan migrate
 # ERROR: Service 'artisan' failed to build : The command '/bin/sh -c docker-php-ext-install pdo pdo_mysql' returned a non-zero code: 11
-# Failed at the first attemption
+# Failed at the first attempt
 # probably a permission issue?
 
 docker-compose run --rm artisan migrate
@@ -895,9 +895,9 @@ docker image rm [images]
 
 Deploy to AWS EC2
 
-1. Create and launch EC2 instance, VPC and security group
+1. Create and launch EC2 instance, VPC, and security group
 2. Configure security group to expose all required ports to WWW
-3. Connect to instance (SSH), install Docker and run container
+3. Connect to instance (SSH), install Docker, and run the container
 
 ### 126. Getting Started With An Example
 
@@ -912,7 +912,7 @@ docker run -d --rm --name node-dep -p 80:80 node-dep-example
 2. Launch Instance
 3. Select Amazon Linux 2 AMI
 4. Choose all default options.
-5. Create new key pairs -> save it as "example-1.cer" on my local machine
+5. Create new key pairs file -> save it as "example-1.cer" on my local machine
 6. Launch
 
 On Instance
@@ -974,18 +974,18 @@ sudo docker run -d --rm -p 80:80 pcsmomo/node-example-1-aws
 
 1. Connect AWS ECS and Click Get Started
 2. Container definition -> Custom-app -> Configure
-   - (This is configure docker run [options])
+   - (This configuration is docker run [options])
    - Container name: node-demo (--name)
    - image: pcsmomo/node-example-1-aws
    - Port mappings: 80 (-p 80:80)
-   - Environment - Entry Point, Command,Working directory and Environment variables
+   - Environment - Entry Point, Command, Working directory, and Environment variables
    - Storage and Logging
      - Storage is equivalent to (-v)
      - Check on Log configuration to see logs
 3. Task definition
-   - Compatibilities FARGATE (Serverless, it runs only when it is excuted, cost-effective)
-4. Service : we could set up Load Balancer, but not now
-5. Cluster : multiple containers would run in this same Cluster
+   - Compatibilities FARGATE (Serverless, it runs only when it is executed, cost-effective)
+4. Service: we could set up Load Balancer, but not now
+5. Cluster: multiple containers would run in this same Cluster
 6. Create!
 7. View Service -> tasks -> click running task -> find the Public IP and go!
 
@@ -1044,7 +1044,7 @@ docker push pcsmomo/goals-node
         - image: pcsmomo/goals-node
         - Port mappings: 80
         - Environment
-          - <!-- Because Dockerfile is using npm start to use node mon for developer mode -->
+          - (Because the Dockerfile is using "npm start" to use nodemon for the developer mode.)
           - command: node, app.js
           - Environment variables
             - MONGODB_USERNAME=max
@@ -1095,7 +1095,7 @@ docker push pcsmomo/goals-node
 Clusters -> goals-app -> Tasks -> Click the running task -> Two Containers are pending -> Runnings -> Connect to the Public IP 13.211.219.9
 
 http&#58;//13.211.219.9 -> This site can’t be reached 13.211.219.9 refused to connect. \
-The lecture said, the load balancer is not configured correctly. See the next lecture.
+The lecture said the load balancer is not configured correctly. See the next lecture.
 
 ### 144. Using a Load Balancer for a Stable Domain
 
@@ -1103,7 +1103,7 @@ AWS EC2 -> Load Balancers -> ecs-lb -> DNS name (This is the endpoint) \
 But still can't reach it. Something was wrong with the target group.
 
 Clusters -> goals-app -> Tasks -> Stopped \
-You can see some stopped tasks. It means something went wrong, so the load balander is recreating the tasks. (another meaning is that the load balander works fine)
+You can see some stopped tasks. It means something went wrong, so the load balancer is recreating the tasks. (another meaning is that the load balancer works fine)
 
 1. AWS EC2 -> Target Groups -> tg (the one we created) -> Health Checks -> Edit -> change Path from "/" to "/goals"
 2. AWS EC2 -> Load Balancers -> ecs-lb -> Security groups -> Add goals-xxxxx one beside the default one
@@ -1162,7 +1162,7 @@ AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force
    - Volume type: EFS
    - File system ID
      1. Click Amazon EFS console to create a new file system
-        - Create file system
+        - Create a file system
           - Name: db-storage
           - Virtual Private Cloud(VPC): choose the same VPC (vpc-0803a9dc38bf99d7e)
           - Customize
@@ -1181,7 +1181,7 @@ AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force
             6. Next: Review and create
             7. Create
      2. refresh File system and select db-storage
-   - Access point: None (You can read the document if you don't want to create new EFS and use several access point on this volume)
+   - Access point: None (You can read the document if you don't want to create a new EFS and use several access points on this volume)
    - Add
    - (This is a little bit as defining "data" volume with docker-compose )
 3. Connecting to the container
@@ -1193,11 +1193,11 @@ AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force
      - Update
 4. Create
 5. Action -> Update Service
-   - Platform version : Latest (Latest sometimes fails to run container then choose 1.4.0)
+   - Platform version: Latest (Latest sometimes fails to run container then choose 1.4.0)
    - Force new deployment: Check
    - Skip to review
    - Update Service
-6. Tasks -> New task will be PROVISIONING, PENDING and RUNNING
+6. Tasks -> the new task will be PROVISIONING, PENDING, and RUNNING
 
 Run Postman and save data
 
@@ -1225,3 +1225,8 @@ AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force
 </details>
 
 ---
+
+## Thoughts
+
+- Holy moly. AWS setting part is always challenging, 18 minutes lecture got me for 2 hours to complete the setting such as "145. Using EFS Volumes with ECS"
+- It might have been a good idea of using the same name of tags on every service for this app
