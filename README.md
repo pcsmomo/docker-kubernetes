@@ -1387,6 +1387,16 @@ Backend: http&#58;//ecs-lb-2034865568.ap-southeast-2.elb.amazonaws.com/goals
 
 ---
 
+## 157. Understanding Multi-Stage Build Targets
+
+```sh
+# --target build
+docker build --target build -f frontend/Dockerfile.prod -t goals-react ./frontend
+```
+
+It will only build the node part and stop it before FROM nginx \
+This option would be helpful, if we have complex dockerfiles with multiple stages.
+
 </details>
 
 ---
