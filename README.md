@@ -1096,6 +1096,50 @@ Clusters -> goals-app -> Tasks -> Click the running task -> Two Containers are p
 http&#58;//13.211.219.9 -> This site can’t be reached 13.211.219.9 refused to connect. \
 The lecture said, the load balancer is not configured correctly. See the next lecture.
 
+### 144. Using a Load Balancer for a Stable Domain
+
+AWS EC2 -> Load Balancers -> ecs-lb -> DNS name (This is the endpoint) \
+But still can't reach it. Something was wrong with the target group.
+
+Clusters -> goals-app -> Tasks -> Stopped \
+You can see some stopped tasks. It means something went wrong, so the load balander is recreating the tasks. (another meaning is that the load balander works fine)
+
+1. AWS EC2 -> Target Groups -> tg (the one we created) -> Health Checks -> Edit -> change Path from "/" to "/goals"
+2. AWS EC2 -> Load Balancers -> ecs-lb -> Security groups -> Add goals-xxxxx one beside the default one
+
+It doesn't work for me.
+So, I created a new revision of Task Definition: goals and updated the service with that one.
+
+✅ It works!!!!!!!, succeeded
+
+Run Postman and send data
+
+```json
+// http://ecs-lb-2034865568.ap-southeast-2.elb.amazonaws.com/goals
+// Method : Post
+// Body -> Raw, JSON
+{
+  "text": "A first test!"
+}
+
+// http://ecs-lb-2034865568.ap-southeast-2.elb.amazonaws.com/goals
+// Method : Get
+{
+  "goals": [
+    {
+      "id": "60e15115465c540021231195",
+      "text": "A first test!"
+    }
+  ]
+}
+
+// http://ecs-lb-2034865568.ap-southeast-2.elb.amazonaws.com/goals/60e15115465c540021231195
+// Method : Delete
+{
+  "message": "Deleted goal!"
+}
+```
+
 </details>
 
 ---
