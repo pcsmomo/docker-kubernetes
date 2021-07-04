@@ -1193,7 +1193,7 @@ AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force
      - Update
 4. Create
 5. Action -> Update Service
-   - Platform version: Latest (Latest sometimes fails to run container then choose 1.4.0)
+   - Platform version: Latest (When using EFS, "Latest" sometimes fails to run container then choose "1.4.0")
    - Force new deployment: Check
    - Skip to review
    - Update Service
@@ -1231,7 +1231,9 @@ AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force
 2. Atlas -> Current Project -> Database Access -> ADD NEW DATABASE USER
    - username: max
    - password: 8D8mEKSXoFlGaVkj (Autogenerate Secure Password)
-   - Read and write to any database
+   - Grant specific privileges or Read and write to any database
+     - readWrite @ goals-dev
+     - readWrite @ goals (production)
 
 Update backend.env and Test
 
@@ -1241,6 +1243,40 @@ docker-compose up
 ```
 
 Test with Postman http&#58;//localhost:goals -> works fine
+
+### 149. Using MongoDB Atlas in Production
+
+```sh
+# Change app.js and backend.env and re-launch the app
+docker build -t goals-node ./backend
+docker tag goals-node pcsmomo/goals-node
+docker push pcsmomo/goals-node
+```
+
+1. AWS ECS -> Task Definitions -> goals:latest -> Create new revision
+2. Delete db container and related volumes
+   - Container Definitions -> mongodb -> delete
+   - AWS Elastic File System (EFS) -> db-storage (fs-011d2539) -> Delete
+   - AWS EC2 -> Security Groups -> efs-sc -> Delete
+   - Make sure to delete "data" volume on this task definition
+3. Change Backend Configurations
+   - Container Definitions -> goals-backend
+     - MONGODB_URL: noahcluster.pvxa3.mongodb.net
+     - MONGODB_PASSWORD: 8D8mEKSXoFlGaVkj
+     - MONGODB_NAME: goals
+4. Create
+5. Action -> Update Service
+   - Platform version: Latest (It's not using EFS anymore so no need to select 1.4.0)
+   - Force new deployment: Check
+   - Skip to review
+   - Update Service
+
+If docker image is deployed to docker hub again, only Update Service is needed
+
+AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force new deployment: Check -> Skip to Review -> Update Service
+
+> I forgot to delete volume part on the task definition after deleting EFS. \
+> Because of this, new tasks failed again and again...😢
 
 </details>
 
