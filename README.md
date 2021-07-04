@@ -1222,6 +1222,26 @@ AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force
 > However, we will replace the mongodb container with a different solution soon. \
 > I guess it's MongoDB Atlas.
 
+### 148. Moving to MongoDB Atlas
+
+> We can use the mongodb container for development and MongoDB Atlas for production. \
+> However, the db versions should be the same, otherwise we could possibly use new or deprecated features between the versions.
+
+1. Atlas -> Current Project -> Network Access -> ADD IP ADDRESS -> ALLOW ACCESS FROM ANYWHERE
+2. Atlas -> Current Project -> Database Access -> ADD NEW DATABASE USER
+   - username: max
+   - password: 8D8mEKSXoFlGaVkj (Autogenerate Secure Password)
+   - Read and write to any database
+
+Update backend.env and Test
+
+```sh
+docker-compose up
+# DB Connected
+```
+
+Test with Postman http&#58;//localhost:goals -> works fine
+
 </details>
 
 ---
