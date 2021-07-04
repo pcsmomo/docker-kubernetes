@@ -974,7 +974,6 @@ sudo docker run -d --rm -p 80:80 pcsmomo/node-example-1-aws
 
 1. Connect AWS ECS and Click Get Started
 2. Container definition -> Custom-app -> Configure
-
    - <!-- This is configure docker run [options] -->
    - Container name: node-demo (--name)
    - image: pcsmomo/node-example-1-aws
@@ -983,7 +982,6 @@ sudo docker run -d --rm -p 80:80 pcsmomo/node-example-1-aws
    - Storage and Logging
      - Storage is equivalent to (-v)
      - Check on Log configuration to see logs
-
 3. Task definition
    - Compatibilities FARGATE (Serverless, it runs only when it is excuted, cost-effective)
 4. Service : we could set up Load Balancer, but not now
@@ -1009,6 +1007,20 @@ docker push pcsmomo/node-example-1-aws
 [Adding a Load Balancer to a Fargate task](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
 
 ---
+
+### 141. Preparing a Multi-Container App
+
+The backend and MongoDB Containers are not in the same docker network \
+But when they are in the same cluster on ECS, they can use localhost. \
+@mongodb:27017/ -> @${process.env.MONGODB_URL}:27017/
+
+Set up MONGODB_URL=mongodb on local as compose service name is mongodb \
+And separately set up MONGODB_URL variable on AWS ECS.
+
+```sh
+docker build -t goals-node ./backend
+docker tag goals-node pcsmomo/goals-node
+```
 
 </details>
 
