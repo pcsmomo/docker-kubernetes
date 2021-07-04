@@ -1022,6 +1022,34 @@ docker build -t goals-node ./backend
 docker tag goals-node pcsmomo/goals-node
 ```
 
+### 142. Configuring the NodeJS Backend Container
+
+1. Create Cluster
+   1. AWS ECS -> Cluster -> Create Cluster
+   2. Networking Only -> Next
+      - Cluster Name: goals-app
+      - Create VPC: check
+      - Create, it takes a couple of minutes
+      - View Cluster
+2. Create Tasks first (Services are based on tasks)
+   1. AWS ECS -> Task Definitions -> Create new Task Definition
+   2. FARGATE -> Next Step
+      - Task Definition Name: goals
+      - Task Role : ecsTaskExecutionRole
+      - Task Memory : 0.5GB (The smallest one)
+      - Task CPU : 0.25 vCPU (The smallest one)
+      - Add container
+        - container name: goals-backend
+        - image: pcsmomo/goals-node
+        - Port mappings: 80
+        - Environment
+          - <!-- Because Dockerfile is using npm start to use node mon for developer mode -->
+          - command: node, app.js
+          - Environment variables
+            - MONGODB_USERNAME=max
+            - MONGODB_PASSWORD=secret
+            - MONGODB_URL=localhost
+
 </details>
 
 ---
