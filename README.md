@@ -1278,6 +1278,10 @@ AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force
 > I forgot to delete volume part on the task definition after deleting EFS. \
 > Because of this, new tasks failed again and again...😢
 
+### 150. Our Updated & Target Architecture
+
+Frontend projects need an extra process, "build" due to JSX which browsers cannot understand.
+
 </details>
 
 ---
