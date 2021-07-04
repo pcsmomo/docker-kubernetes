@@ -1381,7 +1381,11 @@ docker push pcsmomo/goals-react
    5. Create Service
 2. Tasks -> the new task will be PROVISIONING, PENDING, and RUNNING
 
-http&#58;//goals-react-lb-1862629005.ap-southeast-2.elb.amazonaws.com
+✅ Node Server + React Server on AWS, succeeded
+Front: http&#58;//goals-react-lb-1862629005.ap-southeast-2.elb.amazonaws.com
+Backend: http&#58;//ecs-lb-2034865568.ap-southeast-2.elb.amazonaws.com/goals
+
+---
 
 </details>
 
