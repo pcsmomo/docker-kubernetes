@@ -1282,6 +1282,12 @@ AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force
 
 Frontend projects need an extra process, "build" due to JSX which browsers cannot understand.
 
+### 153. Introducing Multi-Stage Builds
+
+[Docker - Use multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/)
+
+[Docker Nginx](https://hub.docker.com/_/nginx)
+
 </details>
 
 ---
