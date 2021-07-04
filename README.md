@@ -1028,7 +1028,7 @@ docker tag goals-node pcsmomo/goals-node
    1. AWS ECS -> Cluster -> Create Cluster
    2. Networking Only -> Next
       - Cluster Name: goals-app
-      - Create VPC: check
+      - Create VPC: check (Take a memo of name of VPC)
       - Create, it takes a couple of minutes
       - View Cluster
 2. Create Tasks first (Services are based on tasks)
@@ -1049,6 +1049,52 @@ docker tag goals-node pcsmomo/goals-node
             - MONGODB_USERNAME=max
             - MONGODB_PASSWORD=secret
             - MONGODB_URL=localhost
+        - Add
+      - Add container
+        - container name: mongodb
+        - image: mongo
+        - Port mappings: 27017
+        - Environment
+          - Environment variables
+            - MONGO_INITDB_ROOT_USERNAME=max
+            - MONGO_INITDB_ROOT_PASSWORD=secret
+   3. Create
+3. Create Service
+   1. AWS ECS -> Cluster -> Services -> Create : Configure service
+      - Launch type: FARGATE
+      - Task Definition: goals
+      - Service name: goals-service
+      - Number of tasks: 1
+      - Next Step
+   2. Configure network
+      - Cluster VPC: choose the one when the cluster created (vpc-0803a9dc38bf99d7e (10.0.0.0/16))
+      - Subnets: Choose both subnets available (ap-southeast-2a, ap-southeast-2b)
+      - Auto-assign public IP: ENABLED
+      - Load balancer type: Application Load Balancer (No load balancer is found)
+      - Click EC2 Console to create a load balancer
+        1. Application Load Balancer, Configure
+           - Name: ecs-lb
+           - VPC: choose the same VPC (vpc-0803a9dc38bf99d7e (10.0.0.0/16))
+           - Availability Zones: check both (ap-southeast-2a, ap-southeast-2b)
+           - Next: Configure Security Settings
+        2. Configure Security Settings : Basic (As we are not using HTTPS now)
+        3. Configure Security Groups : existing default one
+        4. Configure Routing
+           - Name: tg
+           - Target type: IP
+        5. Register Targets: As is, ECS is automatically registering targets here.
+        6. Next: Review -> Create
+      - Refresh Load balancer name and choose ecs-lb
+      - Container name : port : goals-backend:80:80 -> Add to load balancer
+        - target group name: tg
+      - Next step
+   3. Set Auto Scaling (optional) : Do not adjust the service’s desired count
+   4. Review -> Create Service
+
+Clusters -> goals-app -> Tasks -> Click the running task -> Two Containers are pending -> Runnings -> Connect to the Public IP 13.211.219.9
+
+http&#58;//13.211.219.9 -> This site can’t be reached 13.211.219.9 refused to connect. \
+The lecture said, the load balancer is not configured correctly. See the next lecture.
 
 </details>
 
