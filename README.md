@@ -1282,11 +1282,17 @@ AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force
 
 Frontend projects need an extra process, "build" due to JSX which browsers cannot understand.
 
-### 153. Introducing Multi-Stage Builds
+### 154. Building a Multi-Stage Image
 
 [Docker - Use multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/)
 
 [Docker Nginx](https://hub.docker.com/_/nginx)
+
+```sh
+docker build -f frontend/Dockerfile.prod -t goals-react ./frontend
+docker tag goals-react pcsmomo/goals-react
+docker push pcsmomo/goals-react
+```
 
 </details>
 

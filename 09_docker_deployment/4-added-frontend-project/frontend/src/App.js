@@ -14,7 +14,7 @@ function App() {
       setIsLoading(true);
 
       try {
-        const response = await fetch('http://localhost/goals');
+        const response = await fetch('/goals');
 
         const resData = await response.json();
 
@@ -42,7 +42,7 @@ function App() {
       const response = await fetch('http://localhost/goals', {
         method: 'POST',
         body: JSON.stringify({
-          text: goalText,
+          text: goalText
         }),
         headers: {
           'Content-Type': 'application/json'
@@ -59,9 +59,9 @@ function App() {
         const updatedGoals = [
           {
             id: resData.goal.id,
-            text: goalText,
+            text: goalText
           },
-          ...prevGoals,
+          ...prevGoals
         ];
         return updatedGoals;
       });
@@ -78,8 +78,8 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost/goals/' + goalId, {
-        method: 'DELETE',
+      const response = await fetch('/goals/' + goalId, {
+        method: 'DELETE'
       });
 
       const resData = await response.json();
