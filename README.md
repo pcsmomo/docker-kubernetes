@@ -1419,6 +1419,13 @@ Kubernetes is like Docker-Compose for multiple machines
   2. Monitor Pods and re-create them, scale Pods etc.
   3. Kubernetes utilizes the provided (cloud) resources to apply your configuration/goals
 
+### 181. Kubernetes: Required Setup & Installation Steps
+
+Two tools ([more tools](https://kubernetes.io/docs/tasks/tools/))
+
+1. kubectl: The Kubernetes command-line tool, like a president running commands against Kubernetes clusters
+2. minikube: Local Kubernetes. Dummy cluster for developer
+
 </details>
 
 ---
