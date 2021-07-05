@@ -1408,6 +1408,17 @@ This option would be helpful, if we have complex dockerfiles with multiple stage
 
 Kubernetes is like Docker-Compose for multiple machines
 
+### 180. Kubernetes does NOT manage your Infrastructure
+
+- What do I need to do
+  1. Create the Cluster and the Node Instance (Worker + Master Nodes)
+  2. Setup API Server, kublelet and other Kubernetes services / software on Nodes
+  3. Create other (cloud) provider resources that might be needed (e.g. Load Balancer, File systems)
+- What Kubernetes does
+  1. Create objects (e.g. Pods) and manage them
+  2. Monitor Pods and re-create them, scale Pods etc.
+  3. Kubernetes utilizes the provided (cloud) resources to apply your configuration/goals
+
 </details>
 
 ---
