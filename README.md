@@ -1399,6 +1399,17 @@ This option would be helpful, if we have complex dockerfiles with multiple stage
 
 </details>
 
+## Kubernetes
+
+<details>
+  <summary>Click to Contract/Expend</summary>
+
+### 172. What Is Kubernetes Exactly?
+
+Kubernetes is like Docker-Compose for multiple machines
+
+</details>
+
 ---
 
 ## Thoughts
