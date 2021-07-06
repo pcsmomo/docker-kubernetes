@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  selector:
+    # Service doesn't have matchLabels as kind:Service is older than Kind:Deployment
+    app: second-app
+    # commenting tier make the service selects all pods with label second-app
+    # tier: backend
+  ports:
+    - protocol: 'TCP'
+      # kubectl expose deployment second-app-deployment --type=LoadBalancer "--port=8080"
+      port: 80 # outside world
+      targetPort: 8080 # inside container
+    # - protocol: 'TCP'
+    #   port: 443
+    #   targetPort: 443
+  type: LoadBalancer

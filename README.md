@@ -1510,9 +1510,9 @@ minikube dashboard
 
 ### 189. Exposing a Deployment with a Service
 
-- ClusterIP : default, reachable from inside
-- NodePort : this is accessable from outside
-- LoadBalancer
+- ClusterIP : default, reachable from inside of the Cluster
+- NodePort : This is exposed on IP and port of worker nodes
+- LoadBalancer : Most commonly used accessable from outside
 
 ```sh
 kubectl expose deployment first-app --type=LoadBalancer --port=8080
@@ -1655,6 +1655,14 @@ kubectl apply -f=deployment.yaml
 ```sh
 kubectl apply -f=deployment.yaml
 kubectl get pods
+```
+
+### 198. Creating a Service Declaratively
+
+```sh
+kubectl apply -f service.yaml
+kubectl get services
+minikube service backend
 ```
 
 </details>
