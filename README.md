@@ -1532,11 +1532,11 @@ http&#58;//127.0.0.1:56557/error -> Exit node server and throw an error \
 ```sh
 kubectl get pods
 # NAME                         READY   STATUS   RESTARTS   AGE
-# first-app-67468bb98f-l5v9d   0/1     Error    0          5h22m
+# first-app-67468bb98f-l5v9d   0/1     Error    1          5h22m
 
 # After a while
 # NAME                         READY   STATUS    RESTARTS   AGE
-# first-app-67468bb98f-l5v9d   1/1     Running   1          5h22m
+# first-app-67468bb98f-l5v9d   1/1     Running   2          5h22m
 ```
 
 ### 191. Scaling in Action
@@ -1544,7 +1544,26 @@ kubectl get pods
 Replica : An instance of a Pod
 
 ```sh
+# Scale up
 kubectl scale deployment/first-app --replicas=3
+kubectl get pods
+# NAME                         READY   STATUS              RESTARTS   AGE
+# first-app-67468bb98f-l5v9d   1/1     Running             2          5h32m
+# first-app-67468bb98f-bkzhv   0/1     ContainerCreating   0          2s
+# first-app-67468bb98f-s9qgt   0/1     ContainerCreating   0          2s
+```
+
+http&#58;//127.0.0.1:56557/error -> One pot is down but still be able to connent the same url and connected the other running pod.
+
+```sh
+# CrashLoopBackOff
+# NAME                         READY   STATUS              RESTARTS   AGE
+# first-app-67468bb98f-l5v9d   1/1     CrashLoopBackOff    3          5h32m
+```
+
+```sh
+# Scale down
+kubectl scale deployment/first-app --replicas=1
 kubectl get pods
 ```
 
