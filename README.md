@@ -1687,6 +1687,16 @@ kubectl delete -f=deployment.yaml -f=service.yaml
 kubectl apply -f master-deployment.yaml
 ```
 
+### 201. More on Labels & Selectors
+
+```sh
+kubectl delete -f=master-deployment.yaml
+
+# add label on deployment.yaml and service.yaml
+kubectl apply -f=deployment.yaml -f=service.yaml
+kubectl delete deployment,service -l group=example
+```
+
 ---
 
 ## Thoughts

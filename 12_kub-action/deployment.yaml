@@ -4,12 +4,17 @@ kind: Deployment
 metadata:
   # kubectl create deployment "second-app-deployment"
   name: second-app-deployment
+  labels:
+    group: example
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: second-app
       tier: backend
+    # matchExpressions:
+    #   - { key: app, operator: NotIn, values: [second-app, first-app] }
+    # operator: In -> app label has value in values reange
   template:
     # this template means pods, so no need to add kind: Pod
     metadata:
