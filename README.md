@@ -1647,7 +1647,7 @@ Let's make it like docker-compose
 [Deployment v1 apps](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#deployment-v1-apps)
 
 ```sh
-
+kubectl apply -f=deployment.yaml
 ```
 
 </details>
