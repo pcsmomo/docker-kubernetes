@@ -1725,6 +1725,35 @@ kubectl apply -f=deployment.yaml -f=service.yaml
 kubectl delete -f=deployment.yaml -f=service.yaml
 ```
 
+### 207. Starting Project & What We Know Already
+
+```sh
+docker-compose up -d --build
+```
+
+Run Postman and send data
+
+```json
+// http://localhost/story
+// Method : Post
+// Body -> Raw, JSON
+{
+  "text": "A first test!"
+}
+
+// http://localhost/story
+// Method : Get
+{
+  "story": "The first test~~!\n"
+}
+```
+
+```sh
+docker-compose down
+docker-compose up -d --build
+# the data is still stored
+```
+
 ---
 
 ## Thoughts
