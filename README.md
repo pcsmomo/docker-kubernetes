@@ -1567,6 +1567,28 @@ kubectl scale deployment/first-app --replicas=1
 kubectl get pods
 ```
 
+### 192. Updating Deployments
+
+Edit app.js
+
+```sh
+docker build -t pcsmomo/kub-first-app .
+docker push pcsmomo/kub-first-app
+kubectl get deployments
+
+# Clarify the container and the new image path
+# Check the container name "kub-first-app" inside the pod
+kubectl set image deployment/first-app kub-first-app=pcsmomo/kub-first-app
+# New image won't be adjusted because the tag name hasn't been changed
+
+docker build -t pcsmomo/kub-first-app:2 .
+docker push pcsmomo/kub-first-app:2
+kubectl set image deployment/first-app kub-first-app=pcsmomo/kub-first-app:2
+# deployment.apps/first-app image updated
+kubectl rollout status deployment/first-app
+# deployment "first-app" successfully rolled out
+```
+
 </details>
 
 ---
