@@ -1521,6 +1521,21 @@ kubectl get services
 
 # this command is for a local specific purpose
 minikube service first-app
+# http://127.0.0.1:56557/
+```
+
+### 190. Restarting Containers
+
+http&#58;//127.0.0.1:56557/error -> Exit node server and throw an error
+
+```sh
+kubectl get pods
+# NAME                         READY   STATUS   RESTARTS   AGE
+# first-app-67468bb98f-l5v9d   0/1     Error    0          5h22m
+
+# After a while
+# NAME                         READY   STATUS    RESTARTS   AGE
+# first-app-67468bb98f-l5v9d   1/1     Running   1          5h22m
 ```
 
 </details>
