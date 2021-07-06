@@ -1508,6 +1508,21 @@ minikube dashboard
 # can see all details
 ```
 
+### 189. Exposing a Deployment with a Service
+
+- ClusterIP : default, reachable from inside
+- NodePort : this is accessable from outside
+- LoadBalancer
+
+```sh
+kubectl expose deployment first-app --type=LoadBalancer --port=8080
+kubectl get services
+# EXTERNAL-IP keeps <pending>
+
+# this command is for a local specific purpose
+minikube service first-app
+```
+
 </details>
 
 ---
