@@ -26,6 +26,12 @@ spec:
         # kubectl create deployment second-app-deployment "--image=i1,i2,i3"
         - name: second-node
           image: pcsmomo/kub-first-app:2
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 10
+            initialDelaySeconds: 5
           resources:
             limits:
               memory: '128Mi'

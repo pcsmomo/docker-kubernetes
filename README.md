@@ -1697,6 +1697,14 @@ kubectl apply -f=deployment.yaml -f=service.yaml
 kubectl delete deployment,service -l group=example
 ```
 
+### 202. Liveness Probes
+
+```sh
+# after adding livenessProbe
+kubectl apply -f=deployment.yaml -f=service.yaml
+minikube service backend
+```
+
 ---
 
 ## Thoughts
