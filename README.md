@@ -1667,6 +1667,19 @@ minikube service backend
 
 </details>
 
+### 199. Updating & Deleting Resources
+
+Update yaml files and just apply again
+
+```sh
+# All ways work either imperatively and declaratively
+kubectl delete deployment name
+kubectl delete service name
+
+kubectl delete -f=deployment.yaml,service.yaml
+kubectl delete -f deployment.yaml -f service.yaml
+```
+
 ---
 
 ## Thoughts
