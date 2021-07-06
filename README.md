@@ -1632,6 +1632,24 @@ kubectl delete deployment first-app
 # deployement will delete pods
 ```
 
+### 194. The Imperative vs The Declarative Approach
+
+If all those commands could be overwhelming. \
+Let's make it like docker-compose
+
+- Imperative Approach : docker run, kubectl create/expose
+- Declarative Approach : docker-compose, kubectl apply
+
+### 195. Creating a Deployment Configuration File (Declarative Approach)
+
+[Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+
+[Deployment v1 apps](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#deployment-v1-apps)
+
+```sh
+
+```
+
 </details>
 
 ---

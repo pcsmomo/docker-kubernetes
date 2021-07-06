@@ -1,0 +1,6 @@
+apiVersion: apps/v1
+# kubectl create deployment first-app
+kind: Deployment
+metadata:
+  name: second-app-deployment
+spec:
