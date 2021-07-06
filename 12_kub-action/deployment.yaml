@@ -26,6 +26,8 @@ spec:
         # kubectl create deployment second-app-deployment "--image=i1,i2,i3"
         - name: second-node
           image: pcsmomo/kub-first-app:2
+          # image: pcsmomo/kub-first-app:latest
+          imagePullPolicy: Always
           livenessProbe:
             httpGet:
               path: /

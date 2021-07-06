@@ -1705,6 +1705,26 @@ kubectl apply -f=deployment.yaml -f=service.yaml
 minikube service backend
 ```
 
+### 203. A Closer Look at the Configuration Options
+
+Pull the updated image
+
+1. Change tag
+   - image: pcsmomo/kub-first-app:3
+2. Use latest
+   - image: pcsmomo/kub-first-app:latest
+3. Add Pull Policy
+   - image: pcsmomo/kub-first-app:2
+   - imagePullPolicy: Always
+
+```sh
+docker build -t pcsmomo/kub-first-app:2 .
+docker push pcsmomo/kub-first-app:2
+
+kubectl apply -f=deployment.yaml -f=service.yaml
+kubectl delete -f=deployment.yaml -f=service.yaml
+```
+
 ---
 
 ## Thoughts
