@@ -1665,8 +1665,6 @@ kubectl get services
 minikube service backend
 ```
 
-</details>
-
 ### 199. Updating & Deleting Resources
 
 Update yaml files and just apply again
@@ -1753,6 +1751,13 @@ docker-compose down
 docker-compose up -d --build
 # the data is still stored
 ```
+
+### 209. Kubernetes Volumes: Theory & Docker Comparison
+
+Kubernetes Volumes lifetime depends on the Pod lifetime \
+However, Kubernetes Volume is more powerful than Docker Volume
+
+</details>
 
 ---
 
