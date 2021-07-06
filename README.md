@@ -1650,6 +1650,13 @@ Let's make it like docker-compose
 kubectl apply -f=deployment.yaml
 ```
 
+### 197. Working with Labels & Selectors
+
+```sh
+kubectl apply -f=deployment.yaml
+kubectl get pods
+```
+
 </details>
 
 ---
