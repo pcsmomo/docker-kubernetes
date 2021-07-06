@@ -1,8 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  selector:
+    app: second-app
+  ports:
+    - protocol: 'TCP'
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+---
 apiVersion: apps/v1
-# kubectl create "deployment" second-app-deployment
 kind: Deployment
 metadata:
-  # kubectl create deployment "second-app-deployment"
   name: second-app-deployment
 spec:
   replicas: 1
@@ -11,21 +22,15 @@ spec:
       app: second-app
       tier: backend
   template:
-    # this template means pods, so no need to add kind: Pod
     metadata:
       labels:
         app: second-app
         tier: backend
     spec:
       containers:
-        # kubectl create deployment second-app-deployment "--image=i1,i2,i3"
         - name: second-node
           image: pcsmomo/kub-first-app:2
           resources:
             limits:
               memory: '128Mi'
               cpu: '500m'
-        # - name: i2
-        #   image:
-        # - name: i3
-        #   image:

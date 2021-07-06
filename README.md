@@ -1680,6 +1680,13 @@ kubectl delete -f=deployment.yaml,service.yaml
 kubectl delete -f deployment.yaml -f service.yaml
 ```
 
+### 200. Multiple vs Single Config Files
+
+```sh
+kubectl delete -f=deployment.yaml -f=service.yaml
+kubectl apply -f master-deployment.yaml
+```
+
 ---
 
 ## Thoughts
