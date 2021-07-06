@@ -4,6 +4,8 @@ Docker &amp; Kubernetes: The Practical Guide by Maximilian Schwarzmüller
 
 This repository is to summarize this long lecture and it would not include much code.
 
+Docker version 20.10.7, build f0df350
+
 # Details
 
 ## Docker
@@ -1421,10 +1423,55 @@ Kubernetes is like Docker-Compose for multiple machines
 
 ### 181. Kubernetes: Required Setup & Installation Steps
 
+### 182. macOS Setup
+
 Two tools ([more tools](https://kubernetes.io/docs/tasks/tools/))
+and hypervision : Docker
 
 1. kubectl: The Kubernetes command-line tool, like a president running commands against Kubernetes clusters
+   - Install kubectl binary with curl on macOS (https://www.virtualbox.org/wiki/Downloads) : binary
+   - ln -s ./kubectl /usr/local/bin/kubectl
+
+```sh
+# 1. Download the latest release:
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
+
+# 2. Validate the binary (optional)
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl.sha256"
+echo "$(<kubectl.sha256)  kubectl" | shasum -a 256 --check
+# > kubectl: OK
+
+# 3. Make the kubectl binary executable.
+chmod +x ./kubectl
+
+# 4. Move the kubectl binary to a file location on your system PATH.
+sudo mv ./kubectl /usr/local/bin/kubectl
+sudo chown root: /usr/local/bin/kubectl
+
+# 5. Test to ensure the version you installed is up-to-date:
+kubectl version --client
+# Client Version: version.Info{Major:"1", Minor:"21", GitVersion:"v1.21.2", GitCommit:"092fbfbf53427de67cac1e9fa54aaa09a28371d7", GitTreeState:"clean", BuildDate:"2021-06-16T12:59:11Z", GoVersion:"go1.16.5", Compiler:"gc", Platform:"darwin/amd64"}
+```
+
 2. minikube: Local Kubernetes. Dummy cluster for developer
+   - [Installation](https://minikube.sigs.k8s.io/docs/start/) : binary
+   - [Start with docker driver](https://minikube.sigs.k8s.io/docs/drivers/docker/)
+
+```sh
+# Installation
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64
+sudo install minikube-darwin-amd64 /usr/local/bin/minikube
+
+# 2. Start my cluster
+minikube start --driver=docker
+# it creates a docker image and a running container
+
+# 3. Check minikube status
+minikube status
+
+# 4. See minikube web dashboard
+minikube dashboard
+```
 
 </details>
 
@@ -1432,5 +1479,5 @@ Two tools ([more tools](https://kubernetes.io/docs/tasks/tools/))
 
 ## Thoughts
 
-- Holy moly. AWS setting part is always challenging, 18 minutes lecture got me for 2 hours to complete the setting such as "145. Using EFS Volumes with ECS"
-- It might have been a good idea of using the same name of tags on every service for this app
+- Holy moly. AWS setting part is always challenging, 18 minute lecture got me for almost 2 hours to complete the setting such as "145. Using EFS Volumes with ECS"
+- It might be a good idea of using the same name for tags on every service for this app
