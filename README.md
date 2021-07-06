@@ -1526,7 +1526,8 @@ minikube service first-app
 
 ### 190. Restarting Containers
 
-http&#58;//127.0.0.1:56557/error -> Exit node server and throw an error
+http&#58;//127.0.0.1:56557/error -> Exit node server and throw an error \
+-> The server is down but it rolls back and starting restart the service.
 
 ```sh
 kubectl get pods
@@ -1536,6 +1537,15 @@ kubectl get pods
 # After a while
 # NAME                         READY   STATUS    RESTARTS   AGE
 # first-app-67468bb98f-l5v9d   1/1     Running   1          5h22m
+```
+
+### 191. Scaling in Action
+
+Replica : An instance of a Pod
+
+```sh
+kubectl scale deployment/first-app --replicas=3
+kubectl get pods
 ```
 
 </details>
