@@ -1589,6 +1589,49 @@ kubectl rollout status deployment/first-app
 # deployment "first-app" successfully rolled out
 ```
 
+### 193. Deployment Rollbacks & History
+
+```sh
+# make an error
+kubectl set image deployment/first-app kub-first-app=pcsmomo/kub-first-app:3
+kubectl rollout status deployment/first-app
+# Waiting for deployment "first-app" rollout to finish: 1 old replicas are pending termination...
+
+# The new pod failed to run, so the old pod is still running.
+kubectl get pods
+# NAME                         READY   STATUS             RESTARTS   AGE
+# first-app-567948dbdb-vgbq8   0/1     ErrImagePull       0          16s
+# first-app-567948dbdb-vgbq8   0/1     ImagePullBackOff   0          73s
+
+# Roll back to the healthily working pod
+kubectl rollout undo deployment/first-app
+#deployment.apps/first-app rolled back
+
+kubectl get pods
+# The errored pod has been removed
+# NAME                        READY   STATUS    RESTARTS   AGE
+# first-app-fdff796fc-gqf75   1/1     Running   0          17m
+
+kubectl rollout history deployment/first-app
+kubectl rollout history deployment/first-app --revision=3
+
+# Roll back to specific revision
+kubectl rollout undo deployment/first-app --to-revision=1
+kubectl get pods
+# It runs the old pod, but terminates the current one.
+# NAME                         READY   STATUS        RESTARTS   AGE
+# first-app-67468bb98f-v2zlk   1/1     Running       0          7s
+# first-app-fdff796fc-gqf75    1/1     Terminating   0          18m
+```
+
+```sh
+kubectl delete service first-app
+# minicube create the service but kubectl deletes it
+
+kubectl delete deployment first-app
+# deployement will delete pods
+```
+
 </details>
 
 ---
