@@ -1473,6 +1473,41 @@ minikube status
 minikube dashboard
 ```
 
+### 186. A First Deployment - Using the Imperative Approach
+
+```sh
+docker build -t kub-first-app .
+
+# Check minikube running
+minikube status
+# if it's not running
+# minikube start --driver=docker
+
+kubectl help
+kubectl create  # to see create help
+# kubectl is automatically connecting to minikube
+
+# kubectl create deployment first-app --image=kub-first-app
+# kubectl get deployments
+# kubectl get pods
+# kubectl delete deployment first-app
+## We can see the deployment and pod but they are not ready 0/1
+## Because kub-first-app is only on my local machine.
+## So kubectl cannot find the image from the minikube cluster
+
+docker tag kub-first-app pcsmomo/kub-first-app
+docker push pcsmomo/kub-first-app
+kubectl create deployment first-app --image=pcsmomo/kub-first-app
+kubectl get deployments
+# NAME        READY   UP-TO-DATE   AVAILABLE   AGE
+# first-app   1/1     1            1           36s
+kubectl get pods
+# NAME                         READY   STATUS    RESTARTS   AGE
+# first-app-67468bb98f-l5v9d   1/1     Running   0          38s
+minikube dashboard
+# can see all details
+```
+
 </details>
 
 ---
