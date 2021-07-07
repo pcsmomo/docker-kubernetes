@@ -1879,6 +1879,18 @@ Postman test
 }
 ```
 
+### 226. Creating a First Deployment
+
+```sh
+# check no deployment and service running except the default service
+kubectl get deployments
+kubectl get services
+
+users-api % docker build -t pcsmomo/kub-demo-users .
+users-api % docker push pcsmomo/kub-demo-users
+users-api % kubectl apply -f=users-deployment.yaml
+```
+
 </details>
 
 ---
