@@ -1860,6 +1860,25 @@ kubectl delete -f=deployment.yaml
 kubectl apply -f=deployment.yaml
 ```
 
+### 224. Module Introduction
+
+```sh
+docker-compose up -d --build
+```
+
+Postman test
+
+```json
+// http://localhost:8000/tasks
+// Method : Post
+// Header -> Key: Authorization, Value: Noah abc
+// Body -> Raw, JSON
+{
+  "text": "A first task",
+  "title": "Do this, too!"
+}
+```
+
 </details>
 
 ---
