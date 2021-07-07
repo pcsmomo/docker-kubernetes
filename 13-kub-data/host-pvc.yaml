@@ -6,6 +6,7 @@ spec:
   volumeName: host-pv
   accessModes:
     - ReadWriteOnce
+  storageClassName: standard
   # resource is a counter part of capacity on PersistentVolume
   resources:
     requests:
