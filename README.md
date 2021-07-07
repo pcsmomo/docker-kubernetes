@@ -1842,6 +1842,15 @@ kubectl get pvc
 # host-pvc   Bound    host-pv   1Gi        RWO            standard       47s
 ```
 
+### 220. Using Environment Variables
+
+```sh
+# change app.js
+docker build -t pcsmomo/kub-data-demo:2 .
+docker push pcsmomo/kub-data-demo:2
+kubectl apply -f=deployment.yaml
+```
+
 </details>
 
 ---
