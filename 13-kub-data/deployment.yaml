@@ -31,5 +31,7 @@ spec:
               name: story-volume
       volumes:
         - name: story-volume
+          # emptyDir: {}
+          # hostPath:
           persistentVolumeClaim:
             claimName: host-pvc
