@@ -22,10 +22,3 @@ spec:
           #   limits:
           #     memory: '128Mi'
           #     cpu: '500m'
-        - name: auth
-          image: pcsmomo/kub-demo-auth:latest
-          # resources:
-          #   limits:
-          #     memory: '128Mi'
-          #     cpu: '500m'
-          # It occurs 'Insufficient cpu' warning and new pods are stuck in pending
