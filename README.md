@@ -1811,10 +1811,16 @@ kubectl apply -f=deployment.yaml
 Container Storage Interface (CSI) volume is kind of special and flexible. \
 As long as venders(AWS, Azure, Etc.) support this type, we can use csi type
 
-### 216. Defining a Persistent Volume
+### 215. From Volumes to Persistent Volumes
 
 Persistent Volume are detached from nodes and pods \
 So emptyDir and hostPath types are not available.
+
+### 216. Defining a Persistent Volume
+
+[Resource Model](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/scheduling/resources.md)
+
+- E.g. Gi, Mi
 
 </details>
 
