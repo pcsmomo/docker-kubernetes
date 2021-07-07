@@ -14,7 +14,13 @@ spec:
     spec:
       containers:
         - name: users
-          image: pcsmomo/kub-demo-users
+          image: pcsmomo/kub-demo-users:latest
+          resources:
+            limits:
+              memory: '128Mi'
+              cpu: '500m'
+        - name: auth
+          image: pcsmomo/kub-demo-auth:latest
           resources:
             limits:
               memory: '128Mi'

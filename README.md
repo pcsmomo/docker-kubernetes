@@ -1899,6 +1899,17 @@ minikube service users-service
 # http://127.0.0.1:56269
 ```
 
+### 228. Multiple Containers in One Pod
+
+```sh
+auth-api % docker build -t pcsmomo/kub-demo-auth .
+auth-api % docker push pcsmomo/kub-demo-auth
+users-api % docker build -t pcsmomo/kub-demo-users .
+users-api % docker push pcsmomo/kub-demo-users
+```
+
+no need to create service for auth as we don't want to expose this to the outside world
+
 </details>
 
 ---
