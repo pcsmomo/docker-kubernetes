@@ -1949,6 +1949,26 @@ kubernetes % kubectl apply -f=users-deployment.yaml
 Kubernetes clusters come with build-in service, CoreDNS \
 So we can use [service name].default (default namespace)
 
+### 234. Challenge Solution
+
+```sh
+tasks-api % docker build -t pcsmomo/kub-demo-tasks .
+tasks-api % docker push pcsmomo/kub-demo-tasks
+kubernetes % kubectl apply -f=tasks-service.yaml -f=tasks-deployment.yaml
+```
+
+task pod does not run. getting weird error message. \
+I think.. when docker push, some layers are "Mounted from pcsmomo/kub-demo-users" \
+Can't solve this problem now.
+
+```sh
+kubectl logs tasks-deployment-647c85d66c-vr7rb
+# Error: Cannot find module '/app/users-app.js'
+kubectl describe pod tasks-deployment-647c85d66c-9nl9x
+# Normal Pulled 2s kubelet Successfully pulled image "pcxxxmo/kub-demo-tasks:latest" in 3.70906067s
+# Warning BackOff 0s (x2 over 1s) kubelet Back-off restarting failed container
+```
+
 </details>
 
 ---
