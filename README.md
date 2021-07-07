@@ -1771,9 +1771,9 @@ minikube service story-service
 
 We will scratch three types among many many volume types.
 
-- csi
 - emptyDir
 - hostPath
+- csi
 
 ### 212. A First Volume: The "emptyDir" Type
 
@@ -1790,6 +1790,19 @@ kubectl apply -f=deployment.yaml
 # http://127.0.0.1:51643/story -> {"message": "Failed to open file."}
 # Because of emptyDir: {}
 # But now, after saving data, if it clashes with /error, all data will be still there.
+```
+
+The down size of emptyDir is when we have more than one replicas
+
+### 213. A Second Volume: The "hostPath" Type
+
+If there are multiple nodes, hostPath is not good enough but it is better approach than emptyDir
+
+```sh
+# change replicas:2
+kubectl apply -f=deployment.yaml
+# change to hostPath
+kubectl apply -f=deployment.yaml
 ```
 
 </details>
