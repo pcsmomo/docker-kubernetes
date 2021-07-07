@@ -1765,8 +1765,15 @@ docker push pcsmomo/kub-data-demo
 
 kubectl apply -f=service.yaml -f=deployment.yaml
 minikube service story-service
-
 ```
+
+### 211. Getting Started with Kubernetes Volumes
+
+We will scratch three types among many many volume types.
+
+- csi
+- emptyDir
+- hostPath
 
 </details>
 
