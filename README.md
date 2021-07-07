@@ -1969,6 +1969,30 @@ kubectl describe pod tasks-deployment-647c85d66c-9nl9x
 # Warning BackOff 0s (x2 over 1s) kubelet Back-off restarting failed container
 ```
 
+### 235. Adding a Containerized Frontend
+
+```sh
+frontend % docker build -t pcsmomo/kub-demo-frontend .
+frontend % docker push pcsmomo/kub-demo-frontend
+
+docker run -p 80:80 --rm -d pcsmomo/kub-demo-frontend
+# When fetch tasks, we get CORS error
+
+# Add headers related to CORS on task-app.js
+tasks-api % docker build -t pcsmomo/kub-demo-tasks .
+tasks-api % docker push pcsmomo/kub-demo-tasks
+kubernetes % kubectl delete -f=tasks-deployment.yaml
+kubernetes % kubectl apply -f=tasks-deployment.yaml
+
+# add Authorization headers on App.js
+frontend % docker build -t pcsmomo/kub-demo-frontend .
+docker stop frontendserver
+docker run -p 80:80 --rm -d pcsmomo/kub-demo-frontend
+# All features work
+
+docker stop frontendserver
+```
+
 </details>
 
 ---
