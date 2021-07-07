@@ -1910,6 +1910,24 @@ users-api % docker push pcsmomo/kub-demo-users
 
 no need to create service for auth as we don't want to expose this to the outside world
 
+### 229. Pod-internal Communication
+
+```sh
+kubernetes % kubectl apply -f=users-deployment.yaml
+
+kubectl describe pods
+# resources:
+#   limits:
+#     memory: '128Mi'
+#     cpu: '500m'
+# It occurs 'Insufficient cpu' warning and new pods are stuck in pending
+```
+
+- Docker is using AUTH_ADDRESS: auth
+  - as it can approach container name under the same network
+- Kubernetes is using AUTH_ADDRESS: localhost
+  - as it can communicate with localhost under the same pod
+
 </details>
 
 ---
