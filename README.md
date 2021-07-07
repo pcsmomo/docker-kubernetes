@@ -1928,6 +1928,22 @@ kubectl describe pods
 - Kubernetes is using AUTH_ADDRESS: localhost
   - as it can communicate with localhost under the same pod
 
+### 231. Pod-to-Pod Communication with IP Addresses & Environment Variables
+
+```sh
+kubernetes % kubectl apply -f=auth-deployment.yaml,auth-service.yaml
+kubectl get services
+# change localhost to the ClusterIP from auth-service
+kubernetes % kubectl apply -f=users-deployment.yaml
+
+# change to use "AUTH_SERVICE_SERVICE_HOST" kubernetes auth generated
+users-api % docker build -t pcsmomo/kub-demo-users .
+users-api % docker push pcsmomo/kub-demo-users
+
+kubernetes % kubectl delete -f=users-deployment.yaml
+kubernetes % kubectl apply -f=users-deployment.yaml
+```
+
 </details>
 
 ---

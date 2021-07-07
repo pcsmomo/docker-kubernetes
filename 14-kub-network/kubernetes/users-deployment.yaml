@@ -17,7 +17,7 @@ spec:
           image: pcsmomo/kub-demo-users:latest
           env:
             - name: AUTH_ADDRESS
-              value: localhost
+              value: '10.104.105.159'
           # resources:
           #   limits:
           #     memory: '128Mi'
