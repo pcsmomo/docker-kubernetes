@@ -1757,6 +1757,17 @@ docker-compose up -d --build
 Kubernetes Volumes lifetime depends on the Pod lifetime \
 However, Kubernetes Volume is more powerful than Docker Volume
 
+### 210. Creating a New Deployment & Service
+
+```sh
+docker build -t pcsmomo/kub-data-demo .
+docker push pcsmomo/kub-data-demo
+
+kubectl apply -f=service.yaml -f=deployment.yaml
+minikube service story-service
+
+```
+
 </details>
 
 ---
