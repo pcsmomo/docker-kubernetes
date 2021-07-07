@@ -1805,6 +1805,13 @@ kubectl apply -f=deployment.yaml
 kubectl apply -f=deployment.yaml
 ```
 
+### 214. Understanding the "CSI" Volume Type
+
+[Amazon EFS CSI Driver](https://github.com/kubernetes-sigs/aws-efs-csi-driver)
+
+Container Storage Interface (CSI) volume is kind of special and flexible. \
+As long as venders(AWS, Azure, Etc.) support this type, we can use csi type
+
 </details>
 
 ---
