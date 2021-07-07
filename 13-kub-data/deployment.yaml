@@ -14,8 +14,14 @@ spec:
     spec:
       containers:
         - name: story
-          image: pcsmomo/kub-data-demo
+          image: pcsmomo/kub-data-demo:1
           resources:
             limits:
               memory: '128Mi'
               cpu: '500m'
+          volumeMounts:
+            - mountPath: /app/story
+              name: story-volume
+      volumes:
+        - name: story-volume
+          emptyDir: {}

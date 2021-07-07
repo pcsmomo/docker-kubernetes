@@ -1775,9 +1775,31 @@ We will scratch three types among many many volume types.
 - emptyDir
 - hostPath
 
+### 212. A First Volume: The "emptyDir" Type
+
+```sh
+# change app.js
+docker build -t pcsmomo/kub-data-demo:1 .
+docker push pcsmomo/kub-data-demo:1
+kubectl apply -f=deployment.yaml
+# After saving data, if it clashes with /error, all data will be gone.
+# as volume lifetime depends on the pod's lifetime
+
+# Add volume on deployment.yaml
+kubectl apply -f=deployment.yaml
+# http://127.0.0.1:51643/story -> {"message": "Failed to open file."}
+# Because of emptyDir: {}
+# But now, after saving data, if it clashes with /error, all data will be still there.
+```
+
 </details>
 
 ---
+
+## What I have used
+
+- git rebase -i HEAD~2
+- git stash
 
 ## Thoughts
 
