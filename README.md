@@ -1569,9 +1569,8 @@ kubectl get pods
 
 ### 192. Updating Deployments
 
-Edit app.js
-
 ```sh
+# After editing app.js
 docker build -t pcsmomo/kub-first-app .
 docker push pcsmomo/kub-first-app
 kubectl get deployments
@@ -1811,6 +1810,11 @@ kubectl apply -f=deployment.yaml
 
 Container Storage Interface (CSI) volume is kind of special and flexible. \
 As long as venders(AWS, Azure, Etc.) support this type, we can use csi type
+
+### 216. Defining a Persistent Volume
+
+Persistent Volume are detached from nodes and pods \
+So emptyDir and hostPath types are not available.
 
 </details>
 
