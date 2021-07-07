@@ -1851,6 +1851,15 @@ docker push pcsmomo/kub-data-demo:2
 kubectl apply -f=deployment.yaml
 ```
 
+### 221. Environment Variables & ConfigMaps
+
+```sh
+kubectl apply -f=environment.yaml
+kubectl get configmap
+kubectl delete -f=deployment.yaml
+kubectl apply -f=deployment.yaml
+```
+
 </details>
 
 ---

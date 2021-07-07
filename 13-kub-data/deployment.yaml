@@ -17,7 +17,11 @@ spec:
           image: pcsmomo/kub-data-demo:2
           env:
             - name: STORY_FOLDER
-              value: 'story'
+              # value: 'story'
+              valueFrom:
+                configMapKeyRef:
+                  name: data-store-env
+                  key: folder
           resources:
             limits:
               memory: '128Mi'
