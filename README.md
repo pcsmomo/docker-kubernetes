@@ -1955,6 +1955,7 @@ So we can use [service name].default (default namespace)
 tasks-api % docker build -t pcsmomo/kub-demo-tasks .
 tasks-api % docker push pcsmomo/kub-demo-tasks
 kubernetes % kubectl apply -f=tasks-service.yaml -f=tasks-deployment.yaml
+minikube service tasks-service
 ```
 
 task pod does not run. getting weird error message. \
@@ -1986,11 +1987,19 @@ kubernetes % kubectl apply -f=tasks-deployment.yaml
 
 # add Authorization headers on App.js
 frontend % docker build -t pcsmomo/kub-demo-frontend .
+frontend % docker push pcsmomo/kub-demo-frontend
 docker stop frontendserver
 docker run -p 80:80 --rm -d pcsmomo/kub-demo-frontend
 # All features work
 
 docker stop frontendserver
+```
+
+### 236. Deploying the Frontend with Kubernetes
+
+```sh
+kubernetes % kubectl apply -f=frontend-service.yaml -f=frontend-deployment.yaml
+minikube service frontend-service
 ```
 
 </details>
