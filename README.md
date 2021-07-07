@@ -1888,7 +1888,15 @@ kubectl get services
 
 users-api % docker build -t pcsmomo/kub-demo-users .
 users-api % docker push pcsmomo/kub-demo-users
-users-api % kubectl apply -f=users-deployment.yaml
+kubernetes % kubectl apply -f=users-deployment.yaml
+```
+
+### 227. Another Look at Services
+
+```sh
+kubernetes % kubectl apply -f=users-service.yaml
+minikube service users-service
+# http://127.0.0.1:56269
 ```
 
 </details>
