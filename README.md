@@ -1944,6 +1944,11 @@ kubernetes % kubectl delete -f=users-deployment.yaml
 kubernetes % kubectl apply -f=users-deployment.yaml
 ```
 
+### 232. Using DNS for Pod-to-Pod Communication
+
+Kubernetes clusters come with build-in service, CoreDNS \
+So we can use [service name].default (default namespace)
+
 </details>
 
 ---

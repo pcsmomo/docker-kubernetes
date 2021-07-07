@@ -17,7 +17,8 @@ spec:
           image: pcsmomo/kub-demo-users:latest
           env:
             - name: AUTH_ADDRESS
-              value: '10.104.105.159'
+              # value: '10.104.105.159'
+              value: 'auth-service.default' # default namespace
           # resources:
           #   limits:
           #     memory: '128Mi'
