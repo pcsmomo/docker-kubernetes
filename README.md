@@ -2214,6 +2214,12 @@ kubectl get pods
 
 ✅ Kubernetes deploying to AWS EKS, succeeded
 
+### 249. Getting Started with Volumes
+
+As we have two nodes, we cannot use emptyDir nor hostPath.
+
+[Amazon EFS CSI Driver](https://github.com/kubernetes-sigs/aws-efs-csi-driver)
+
 </details>
 
 ---
