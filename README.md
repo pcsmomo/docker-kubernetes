@@ -974,7 +974,7 @@ sudo docker run -d --rm -p 80:80 pcsmomo/node-example-1-aws
 
 ### 138. Deploying with AWS ECS: A Managed Docker Container Service
 
-1. Connect AWS ECS and Click Get Started
+1. Connect AWS ECS (Elastic Container Service) and Click Get Started
 2. Container definition -> Custom-app -> Configure
    - (This configuration is docker run [options])
    - Container name: node-demo (--name)
@@ -2066,6 +2066,64 @@ POSTMAN Test
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjU3MTc4NTEsImV4cCI6MTYyNTcyMTQ1MX0.Qq3OnxXdHFlcI-Bhvxhqnc_Nt8l5hw0lOLciX60KxiU",
   "userId": "60e67c119bb1ae5f727c841b"
 }
+```
+
+### 246. Creating & Configuring the Kubernetes Cluster with EKS
+
+1. AWS EKS (Elastic Kubernetes Service)
+   - cluster name: kub-dep-demo
+   - Next step
+   1. Configure cluster
+      - kubernetes version: 1.17
+      - Create Role
+        1. IAM -> Roles -> Create role
+        2. AWS service -> EKS -> EKS - Cluster -> Next: Permissions
+        3. Permissions -> Next: Tags
+        4. Tags : Next: Review
+        5. Review : Role name: eksClusterRole -> Create Role
+      - Cluster Service Role: refresh and choose eksClusterRole
+      - Next
+   2. Specify networking
+      - AWS CloudFormation -> Create stack
+        1. Create stack
+           - [Create VPC](https://docs.aws.amazon.com/eks/latest/userguide/create-public-private-vpc.html#create-vpc)
+           - Amazon S3 URL: https://s3.us-west-2.amazonaws.com/amazon-eks/cloudformation/2020-10-29/amazon-eks-vpc-private-subnets.yaml
+           - Next
+        2. Specify stack details
+           - Stack name: eksVpc
+           - Next
+        3. Tags -> Next
+        4. Review -> Create stack
+      - VPC : refresh and choose eksVpc
+      - Cluster endpoint access: Public and private
+      - Next
+   3. Configure logging : Next
+   4. Review: Create
+
+#### Configure kube config file
+
+```sh
+subl /Users/noah/.kube/config
+cp config config.minikube # create a backup
+```
+
+[Install AWS CLI](https://aws.amazon.com/cli/)
+
+1. AWS My security credentials -> Create access key and download the csv file
+
+```sh
+aws configure
+# AWS Access Key ID [None]: ABCDE
+# AWS Secret Access Key [None]: ZXYW
+# Default region name [None]: ap-southeast-2
+# Default output format [None]:
+
+aws eks --region ap-southeast-2 update-kubeconfig --name kub-dep-demo
+# It adds my EKS cluster configurations to /Users/noah/.kube/config \
+
+minikube delete
+kubectl get pods
+# kubectl is connected to my EKS Cluster now
 ```
 
 ## </details>
