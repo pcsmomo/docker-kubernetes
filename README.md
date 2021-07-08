@@ -2157,6 +2157,63 @@ AWS EC2 -> Instances -> Two instances are running
 It is all set up for the cluster. \
 Now, it works as minikube but in AWS
 
+### 248. Applying Our Kubernetes Config
+
+```sh
+kubernetes % kubectl apply -f=auth.yaml -f=users.yaml
+kubectl get pods
+kubectl get services
+# minikube does not have External IP but now we have
+# aca2d4a6bd8c9448683bdfa982300344-329379899.ap-southeast-2.elb.amazonaws.com
+```
+
+AWS EC2 -> Load Balancers -> one load balancer has been created
+
+POSTMAN Test
+
+```json
+// aca2d4a6bd8c9448683bdfa982300344-329379899.ap-southeast-2.elb.amazonaws.com/signup
+// Method : Post
+// Body -> Raw, JSON
+{
+  "email": "test2@test.com",
+  "password": "testpass"
+}
+// Result
+{
+  "message": "User created.",
+  "user": {
+    "_id": "60e78cb8d906e70e9e45fd77",
+    "email": "test2@test.com",
+    "password": "$2a$12$Bs4h4K1LifbqGDLbXDGtYuYBZ0QCxszXxfPCsIJ1JwPEU0T5q/GoG",
+    "__v": 0
+  }
+}
+
+// aca2d4a6bd8c9448683bdfa982300344-329379899.ap-southeast-2.elb.amazonaws.com/login
+// Method : Post
+// Body -> Raw, JSON
+{
+  "email": "test@test.com",
+  "password": "testpass"
+}
+// Result
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjU3ODc2NDgsImV4cCI6MTYyNTc5MTI0OH0.Ij9-kBdiDZeux09JhtjvCbX_mLi5puESjp-X9ZttoYA",
+  "userId": "60e67c119bb1ae5f727c841b"
+}
+```
+
+```sh
+# Change users.yaml
+kubernetes % kubectl apply -f=users.yaml
+kubectl get pods
+```
+
+### Very same process as working with minikube on local.
+
+✅ Kubernetes deploying to AWS EKS, succeeded
+
 </details>
 
 ---
