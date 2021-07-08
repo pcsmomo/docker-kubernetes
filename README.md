@@ -2002,6 +2002,17 @@ kubernetes % kubectl apply -f=frontend-service.yaml -f=frontend-deployment.yaml
 minikube service frontend-service
 ```
 
+237. Using a Reverse Proxy for the Frontend
+
+Reverse Proxy
+
+```sh
+frontend % docker build -t pcsmomo/kub-demo-frontend .
+frontend % docker push pcsmomo/kub-demo-frontend
+kubernetes % kubectl delete -f=frontend-deployment.yaml
+kubernetes % kubectl apply -f=frontend-deployment.yaml
+```
+
 </details>
 
 ---
