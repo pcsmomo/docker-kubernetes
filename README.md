@@ -2126,7 +2126,40 @@ kubectl get pods
 # kubectl is connected to my EKS Cluster now
 ```
 
-## </details>
+### 247. Adding Worker Nodes
+
+1. Amazon EKS Cluster - kub-dep-demo
+2. Compute -> Add Node Group
+   1. Configure Node Group
+      - Name: demo-dep-nodes
+      - Create Role
+        1. IAM -> Roles -> Create role
+        2. AWS service -> EC2 -> Next: Permissions
+        3. Permissions
+           - AmazonEKSWorkerNodePolicy
+           - AmazonEKS_CNI_Policy
+           - AmazonEC2ContainerRegistryReadOnly
+           - Next: Tags
+        4. Tags : Next: Review
+        5. Review : Role name: eksNodeGroup -> Create Role
+      - Cluster Service Role: refresh and choose eksNodeGroup
+      - Next
+   2. Set compute and scaling configuration
+      - Instance types: t3.small (t3.micro can fail)
+      - Next
+   3. Specify networking
+      - Allow remote access to nodes: disabled
+      - Next
+   4. Review -> Create
+
+AWS EC2 -> Instances -> Two instances are running
+
+It is all set up for the cluster. \
+Now, it works as minikube but in AWS
+
+</details>
+
+---
 
 ## What I have used
 
