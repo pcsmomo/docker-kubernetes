@@ -2015,7 +2015,60 @@ kubernetes % kubectl apply -f=frontend-deployment.yaml
 
 </details>
 
----
+## Kubernetes Deployment
+
+<details>
+  <summary>Click to Contract/Expend</summary>
+
+### 243. Preparing the Starting Project
+
+```sh
+users-api % docker build -t pcsmomo/kub-dep-users .
+users-api % docker push pcsmomo/kub-dep-users
+auth-api % docker build -t pcsmomo/kub-dep-auth .
+auth-api % docker push pcsmomo/kub-dep-auth
+
+# For testing myself
+kubernetes % kubectl apply -f=users.yaml,auth.yaml
+minikube service users-service
+```
+
+POSTMAN Test
+
+```json
+// http://127.0.0.1:56279/signup
+// Method : Post
+// Body -> Raw, JSON
+{
+  "email": "test@test.com",
+  "password": "testpass"
+}
+// Result
+{
+  "message": "User created.",
+  "user": {
+    "_id": "60e67c119bb1ae5f727c841b",
+    "email": "test@test.com",
+    "password": "$2a$12$hWFQeJyU9nGY8Vb1Wiz/O.gn7Rt0d90dPiK6sBeBA7dlys9aMhY9C",
+    "__v": 0
+  }
+}
+
+// http://127.0.0.1:56279/login
+// Method : Post
+// Body -> Raw, JSON
+{
+  "email": "test@test.com",
+  "password": "testpass"
+}
+// Result
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjU3MTc4NTEsImV4cCI6MTYyNTcyMTQ1MX0.Qq3OnxXdHFlcI-Bhvxhqnc_Nt8l5hw0lOLciX60KxiU",
+  "userId": "60e67c119bb1ae5f727c841b"
+}
+```
+
+## </details>
 
 ## What I have used
 
@@ -2026,3 +2079,5 @@ kubernetes % kubectl apply -f=frontend-deployment.yaml
 
 - Holy moly. AWS setting part is always challenging, 18 minute lecture got me for almost 2 hours to complete the setting such as "145. Using EFS Volumes with ECS"
 - It might be a good idea of using the same name for tags on every service for this app
+
+## next remove mongodb user
