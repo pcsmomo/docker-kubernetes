@@ -1227,6 +1227,8 @@ AWS ECS -> Clusters -> goals-app -> Services -> goals-service -> Update -> Force
 > However, we will replace the mongodb container with a different solution soon. \
 > I guess it's MongoDB Atlas.
 
+> AWS setting part is always challenging, 18 minute lecture got me for almost 2 hours to complete the setting such as "145. Using EFS Volumes with ECS"
+
 ### 148. Moving to MongoDB Atlas
 
 > We can use the mongodb container for development and MongoDB Atlas for production. \
@@ -2389,7 +2391,4 @@ POSTMAN Test
 
 ## Thoughts
 
-- Holy moly. AWS setting part is always challenging, 18 minute lecture got me for almost 2 hours to complete the setting such as "145. Using EFS Volumes with ECS"
 - It might be a good idea of using the same name for tags on every service for this app
-
-## next remove mongodb user
