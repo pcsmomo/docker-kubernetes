@@ -2220,6 +2220,46 @@ As we have two nodes, we cannot use emptyDir nor hostPath.
 
 [Amazon EFS CSI Driver](https://github.com/kubernetes-sigs/aws-efs-csi-driver)
 
+### 250. Adding EFS as a Volume (with the CSI Volume Type)
+
+```sh
+# Install aws efs csi driver
+kubectl apply -k "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.3"
+```
+
+> We need this EFS driver since AWS EFS is not supported as a volume type otherwise.
+
+Create a security group
+
+1. AWS EC2 -> Security Groups -> Create security group
+   - Security group name: eks-efs-sg
+   - Description: for efs
+   - VPC: eksVpc-VPC
+   - Add Inbound rule
+     - Type: NFS
+     - Source
+       - New Tab -> VPC -> Your VPCs -> eksVpc-VPC -> IPv4 CIDR -> copy 192.168.0.0/16
+       - Custom: 192.168.0.0/16
+   - Create security group
+     - sg-04009b9e7c10462ba - eks-efs-sg
+
+Create EFS
+
+1. Click Amazon EFS console to create a new file system
+   - Create a file system
+     - Name: eks-efs
+     - Virtual Private Cloud(VPC): eksVpc-VPC
+     - Customize
+       1. File system setting -> Next
+       2. Network access
+          - we would have two availability zones
+          - click x on default security groups
+          - choose eks-efs-sg on both zones
+          - Next
+       3. File system policy -> Next
+       4. Review and create -> Create
+          - eks-efs - fs-a49fa49c
+
 </details>
 
 ---
