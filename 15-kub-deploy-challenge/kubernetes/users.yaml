@@ -17,7 +17,7 @@ spec:
   storageClassName: efs-sc
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: fs-59d14521
+    volumeHandle: fs-a49fa49c
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -60,10 +60,10 @@ spec:
     spec:
       containers:
         - name: users-api
-          image: academind/kub-dep-users:latest
+          image: pcsmomo/kub-dep-users:latest
           env:
             - name: MONGODB_CONNECTION_URI
-              value: 'mongodb+srv://maximilian:wk4nFupsbntPbB3l@cluster0.ntrwp.mongodb.net/users?retryWrites=true&w=majority'
+              value: 'mongodb+srv://max:8D8mEKSXoFlGaVkj@noahcluster.pvxa3.mongodb.net/users?retryWrites=true&w=majority'
             - name: AUTH_API_ADDRESS
               value: 'auth-service.default:3000'
           volumeMounts:

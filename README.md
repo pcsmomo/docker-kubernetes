@@ -2308,6 +2308,76 @@ kubernetes % kubectl apply -f=users.yaml
 aca2d4a6bd8c9448683bdfa982300344-329379899.ap-southeast-2.elb.amazonaws.com/logs \
 -> the log data is still stored
 
+### 253. A Challenge!
+
+```sh
+users-api % docker build -t pcsmomo/kub-dep-users .
+users-api % docker push pcsmomo/kub-dep-users
+auth-api % docker build -t pcsmomo/kub-dep-auth .
+auth-api % docker push pcsmomo/kub-dep-auth
+tasks-api % docker build -t pcsmomo/kub-dep-tasks .
+tasks-api % docker push pcsmomo/kub-dep-tasks
+
+kubernetes % kubectl delete -f=users.yaml -f=auth.yaml -f=tasks.yaml
+kubernetes % kubectl apply -f=users.yaml -f=auth.yaml -f=tasks.yaml
+
+kubectl get services
+# users-service: a301c635f10d049ac917cbfc5c43a82f-2086223343.ap-southeast-2.elb.amazonaws.com
+# tasks-service: abcc03a4e1af34b379149fce6d56679b-825297456.ap-southeast-2.elb.amazonaws.com
+```
+
+POSTMAN Test
+
+```json
+// Tasks-service
+// abcc03a4e1af34b379149fce6d56679b-825297456.ap-southeast-2.elb.amazonaws.com
+// Method : Get
+// Result
+{"message":"Could not authenticate user."}
+
+// Users-service
+// a301c635f10d049ac917cbfc5c43a82f-2086223343.ap-southeast-2.elb.amazonaws.com/login
+// Method : Post
+// Body -> Raw, JSON
+{
+  "email": "test3@test.com",
+  "password": "testpass"
+}
+// Result
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGU2N2MxMTliYjFhZTVmNzI3Yzg0MWIiLCJpYXQiOjE2MjU3OTMwNTQsImV4cCI6MTYyNTc5NjY1NH0.ePIHEqC_mci0rd4HsFO5MLYr4z0Qn-qNXPB5_Lijb9U",
+  "userId": "60e67c119bb1ae5f727c841b"
+}
+
+// Tasks-service
+// abcc03a4e1af34b379149fce6d56679b-825297456.ap-southeast-2.elb.amazonaws.com
+// Method : Get
+// Header -> Key: Authorization, Value: Noah eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGU2N2MxMTliYjFhZTVmNzI3Yzg0MWIiLCJpYXQiOjE2MjU3OTMwNTQsImV4cCI6MTYyNTc5NjY1NH0.ePIHEqC_mci0rd4HsFO5MLYr4z0Qn-qNXPB5_Lijb9U
+// Result
+{"tasks":[]}
+
+// abcc03a4e1af34b379149fce6d56679b-825297456.ap-southeast-2.elb.amazonaws.com
+// Method : Post
+// Header -> Key: Authorization, Value: Noah eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGU2N2MxMTliYjFhZTVmNzI3Yzg0MWIiLCJpYXQiOjE2MjU3OTMwNTQsImV4cCI6MTYyNTc5NjY1NH0.ePIHEqC_mci0rd4HsFO5MLYr4z0Qn-qNXPB5_Lijb9U
+// Body -> Raw, JSON
+{
+  "title": "Learn Docker",
+  "text": "Learn it in-depth!!"
+}
+// Result
+{
+  "task": {
+    "_id": "60e7a2ddf9d5146059636d05",
+    "title": "Learn Docker",
+    "text": "Learn it in-depth!!",
+    "user": "60e67c119bb1ae5f727c841b",
+    "__v": 0
+  }
+}
+```
+
+✅ Kubernetes deploying with two services to AWS EKS, succeeded
+
 </details>
 
 ---
