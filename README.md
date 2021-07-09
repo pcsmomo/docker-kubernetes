@@ -2260,6 +2260,14 @@ Create EFS
        4. Review and create -> Create
           - eks-efs - fs-a49fa49c
 
+### 251. Creating a Persistent Volume for EFS
+
+(AWS EFS CSI Driver Kubernetes Example)(https://github.com/kubernetes-sigs/aws-efs-csi-driver/tree/master/examples/kubernetes/static_provisioning)
+
+```sh
+
+```
+
 </details>
 
 ---
