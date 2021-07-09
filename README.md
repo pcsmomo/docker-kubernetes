@@ -2264,9 +2264,49 @@ Create EFS
 
 (AWS EFS CSI Driver Kubernetes Example)(https://github.com/kubernetes-sigs/aws-efs-csi-driver/tree/master/examples/kubernetes/static_provisioning)
 
-```sh
+### 252. Using the EFS Volume
 
+```sh
+users-api % docker build -t pcsmomo/kub-dep-users .
+users-api % docker push pcsmomo/kub-dep-users
+kubernetes % kubectl delete deployment users-deployment
+kubernetes % kubectl apply -f=users.yaml
 ```
+
+POSTMAN Test
+
+```json
+// aca2d4a6bd8c9448683bdfa982300344-329379899.ap-southeast-2.elb.amazonaws.com/signup
+// Method : Post
+// Body -> Raw, JSON
+{
+  "email": "test3@test.com",
+  "password": "testpass"
+}
+
+// aca2d4a6bd8c9448683bdfa982300344-329379899.ap-southeast-2.elb.amazonaws.com/logs
+// Method : Get
+// Result
+{
+  "logs": [
+    "2021-07-09T00:31:15.343Z - 60e798d338e9fcaf3283d5d6 - test3@test.com",
+    ""
+  ]
+}
+```
+
+Check EFS \
+Amazon EFS -> File systems -> fs-a49fa49c -> Monitoring
+
+One more test, set replicas: 0 and restore
+
+```sh
+# change replicas:0 on users.yaml
+kubernetes % kubectl apply -f=users.yaml
+```
+
+aca2d4a6bd8c9448683bdfa982300344-329379899.ap-southeast-2.elb.amazonaws.com/logs \
+-> the log data is still stored
 
 </details>
 
